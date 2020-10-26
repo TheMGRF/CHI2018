@@ -4,6 +4,15 @@ include_once 'classes/pages/FillableWebPage.class.php';
 include_once 'classes/pages/RoutedWebPage.class.php';
 include_once 'classes/Router.class.php';
 
-$page = new Router($_GET["page"]);
+$target = "";
+
+switch (isset($_GET["page"])) {
+    case "api":
+        $page = new Router("api");
+        break;
+    case "documentation":
+    default:
+        $page = new Router("documentation");
+}
 echo $page->getPage();
 ?>
