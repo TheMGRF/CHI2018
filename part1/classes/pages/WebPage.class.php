@@ -8,7 +8,7 @@ include_once 'classes/pages/IWebPage.class.php';
  *
  * @author Thomas Griffiths (W18013094)
  */
-class WebPage implements IWebPage {
+abstract class WebPage implements IWebPage {
 
     private $title, $header, $css;
 
