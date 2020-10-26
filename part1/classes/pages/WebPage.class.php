@@ -1,7 +1,7 @@
 <?php
 namespace pages;
 
-include_once 'classes/pages/IWebPage.class.php';
+include_once 'IWebPage.class.php';
 
 /**
  * Creates a HTML webpage based on the supplied parameters
