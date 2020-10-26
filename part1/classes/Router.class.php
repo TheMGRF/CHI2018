@@ -1,33 +1,37 @@
 <?php
+
+use pages\FillableWebPage;
+use pages\RoutedWebPage;
+
 /**
  * This Router will return api endpoints or the documentation page
  *
  * @author Thomas Griffiths (W18013094)
- * @param $pageType - can be "api" or "documentation"
- *
  */
 class Router {
     private $page;
 
+    /**
+     * Router constructor.
+     *
+     * @param $pageType - can be "api" or "documentation"
+     */
     public function __construct($pageType) {
         switch ($pageType) {
-            case 'api':
-                // api
+            case "api": // api
+                $this->page = new FillableWebPage("api.html", "api", "API", "<p>Api garbage</p>");
                 break;
-            case 'documentation':
-                // documentation
+            case "documentation": // documentation
+                $this->page = new RoutedWebPage("documentation.html", "documentation", "Documentation", "api.css");
                 break;
             default:
                 //error
                 break;
         }
-        $css = "styles/style.css";
-        $this->page = new webpage();
-        $this->page->addToBody($text);
     }
 
-    public function get_page() {
-        return $this->page->get_page();
+    public function getPage() {
+        return $this->page->getPage();
     }
 }
 ?>
