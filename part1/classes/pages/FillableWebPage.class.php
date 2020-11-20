@@ -2,7 +2,7 @@
 namespace pages;
 
 /**
- * Creates a HTML webpage based on the supplied parameters
+ * Creates a HTML web page based on the supplied parameters
  *
  * @author Thomas Griffiths (W18013094)
  */
@@ -29,7 +29,6 @@ class FillableWebPage extends WebPage {
     public function getPage() {
         return $this->content;
     }
-
 
 }
 ?>

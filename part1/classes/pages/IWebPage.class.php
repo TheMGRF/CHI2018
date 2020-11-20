@@ -8,7 +8,5 @@ interface IWebPage {
     public function getHeader();
 
     public function getCSS();
-
-    public function getPage();
 }
 ?>
