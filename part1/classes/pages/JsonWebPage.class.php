@@ -40,6 +40,7 @@ class JsonWebPage implements Pageable {
     }
 
     private function info() {
+        http_response_code(200);
         return json_encode([
             "message" => "Welcome to the CHI2018 API!",
             "author" => "Thomas Griffiths",
@@ -48,6 +49,7 @@ class JsonWebPage implements Pageable {
     }
 
     private function help() {
+        http_response_code(200);
         $msg = ["message" => "You'll need it bud."];
         return json_encode($msg);
     }
@@ -60,7 +62,8 @@ class JsonWebPage implements Pageable {
     }
 
     private function defaultMessage() {
-        return json_encode(["message" => "CHI2018 API!"]);
+        http_response_code(400);
+        return json_encode(["message" => "Invalid API endpoint provided!"]);
     }
 
     /**
