@@ -6,7 +6,9 @@ namespace pages;
  *
  * @author Thomas Griffiths (W18013094)
  */
-class JsonWebPage implements Grabbable {
+class JsonWebPage implements Pageable {
+
+    const END_POINTS = ["api", "help", "login", "update"];
 
     private $page;
 
@@ -20,22 +22,29 @@ class JsonWebPage implements Grabbable {
 
         switch ($path) {
             case "api":
-                $this->page = $this->welcome();
+                $this::setPage($this::info());
                 break;
             case "help":
-                $this->page = $this->help();
+                $this::setPage($this::help());
                 break;
-            case "yes":
-                $this->page = $this->yes();
+            case "login":
+                $this::setPage($this::login());
+                break;
+            case "update":
+                $this::setPage($this::update());
                 break;
             default:
-                $this->page = $this->default();
+                $this::setPage($this::defaultMessage());
                 break;
         }
     }
 
-    private function welcome() {
-        return json_encode(["message" => "welcome", "author" => "Thomas Griffiths"]);
+    private function info() {
+        return json_encode([
+            "message" => "Welcome to the CHI2018 API!",
+            "author" => "Thomas Griffiths",
+            "endpoints" => $this::END_POINTS
+        ]);
     }
 
     private function help() {
@@ -43,25 +52,38 @@ class JsonWebPage implements Grabbable {
         return json_encode($msg);
     }
 
-    private function yes() {
-        $msg = ["yes" => "yes"];
-        return json_encode($msg);
+    private function login() {
+        return json_encode(["logged-in" => false]);
+    }
+    private function update() {
+        return json_encode(["updated" => false]);
     }
 
-    private function default() {
+    private function defaultMessage() {
         return json_encode(["message" => "CHI2018 API!"]);
     }
 
-
+    /**
+     * Get the API JSON content for this "page"
+     */
     public function getPage() {
-        // headers for not caching the results
+        // dont cache the JSON
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 
-        // headers to tell that result is JSON
+        // define that this is actually JSON
         header('Content-type: application/json');
 
         echo $this->page;
+    }
+
+    /**
+     * Set the JSON content for this "page"
+     *
+     * @param string $page The JSON content to set for this "page"
+     */
+    public function setPage(string $page) {
+        $this->page = $page;
     }
 
 }

@@ -8,7 +8,7 @@ include_once 'IWebPage.class.php';
  *
  * @author Thomas Griffiths (W18013094)
  */
-abstract class WebPage implements IWebPage, Grabbable {
+abstract class WebPage implements IWebPage, Pageable {
 
     private $title, $header, $css;
 

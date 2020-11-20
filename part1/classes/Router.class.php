@@ -40,9 +40,6 @@ class Router {
             : $ini['routes']['error'];
 
         $this->page = new RoutedWebPage($pageInfo['route'], $pageInfo['title'], $pageInfo['heading1'], $pageInfo['title']);
-        //new RoutedWebPage("documentation.html", "documentation", "Documentation", "api.css");
-        //$this->page = new WebPageWithNav($pageInfo['title'], $pageInfo['heading1'], $pageInfo['footer']);
-        //$this->page->addToBody($pageInfo['text']);
     }
 
     public function getPage() {

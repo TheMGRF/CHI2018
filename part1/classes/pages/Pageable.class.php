@@ -1,7 +1,7 @@
 <?php
 namespace pages;
 
-interface Grabbable {
+interface Pageable {
 
     public function getPage();
 
