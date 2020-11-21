@@ -7,7 +7,7 @@ class JSONRecordSet extends RecordSet {
      *
      * @param string $query with sql to execute to retrieve the record set
      * @param array $params associative array of params for preparted statement
-     * @return string  a json documnent
+     * @return string  a json document
      */
     function getJSONRecordSet($query, $params = null) {
         $stmt = $this->getRecordSet($query, $params);

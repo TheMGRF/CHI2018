@@ -10,6 +10,7 @@ use pages\RoutedWebPage;
  * @author Thomas Griffiths (W18013094)
  */
 class Router {
+
     private $page;
 
     /**
@@ -17,7 +18,7 @@ class Router {
      *
      * @param $pageType - can be "api" or "documentation"
      */
-    public function __construct($recordset) {
+    public function __construct() {
         $url = $_SERVER["REQUEST_URI"];
         $path = parse_url($url)['path'];
 
@@ -26,10 +27,10 @@ class Router {
 
         $path = (empty($pathArr[2])) ? "main" : $pathArr[2];
 
-        ($path == "api") ? $this->api_route($pathArr, $recordset) : $this->html_route($path);
+        ($path == "api") ? $this->api_route($pathArr) : $this->html_route($path);
     }
 
-    public function api_route($pathArr, $recordset) {
+    public function api_route($pathArr) {
         $this->page = new JsonWebPage($pathArr);
     }
 

@@ -1,6 +1,8 @@
 <?php
 namespace pages;
 
+use JSONRecordSet;
+
 /**
  * Creates a JSON web page based on the supplied parameters
  *
@@ -10,6 +12,7 @@ class JsonWebPage implements Pageable {
 
     const END_POINTS = ["api", "help", "login", "update"];
 
+    private $recordSet;
     private $page;
 
     /**
@@ -19,6 +22,7 @@ class JsonWebPage implements Pageable {
      */
     public function __construct(array $pathArg) {
         $path = (empty($pathArg[3])) ? "api" : $pathArg[3];
+        $this->recordSet = new JSONRecordSet(DATABASE);
 
         switch ($path) {
             case "api":
@@ -32,6 +36,9 @@ class JsonWebPage implements Pageable {
                 break;
             case "update":
                 $this::setPage($this::update());
+                break;
+            case "authors":
+                $this::setPage($this::authors());
                 break;
             default:
                 $this::setPage($this::defaultMessage());
@@ -57,8 +64,24 @@ class JsonWebPage implements Pageable {
     private function login() {
         return json_encode(["logged-in" => false]);
     }
+
     private function update() {
         return json_encode(["updated" => false]);
+    }
+
+    private function authors() {
+        $query = "SELECT * FROM `authors`";
+
+        if (isset($_REQUEST["name"])) {
+            $query = $this->search($query, "name", $_REQUEST["name"]);
+        } else if (isset($_REQUEST["id"])) {
+            $query = $this->search($query, "authorId", $_REQUEST["id"]);
+        }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
     }
 
     private function defaultMessage() {
@@ -89,6 +112,13 @@ class JsonWebPage implements Pageable {
         $this->page = $page;
     }
 
+    private function search(string $query, string $element, string $search) {
+        return $query . " WHERE `" . $element . "` LIKE " . "'%" . $search . "%'";
+    }
+
+    private function limit(string $query, int $limit) {
+        return $query . " LIMIT " . $limit;
+    }
 }
 
 ?>

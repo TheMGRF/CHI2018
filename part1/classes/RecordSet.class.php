@@ -3,31 +3,32 @@
 /**
  * Abstract class that creates a database connection and returns a recordset
  * Follows the recordset pattern
+ *
  * @author Thomas Griffiths (W18013094)
  */
 abstract class RecordSet {
 
-    protected $conn;
+    protected $dbConn;
     protected $stmt;
 
     function __construct($dbname) {
-        //$this->conn = PDOdb::getConnection($dbname);
+        $this->dbConn = DatabaseConnection::getConnection($dbname);
     }
 
     /**
      * This function will execute the query as a prepared statement if there is a
-     * params array. If not, it executes as a regular statament.
+     * params array. If not, it executes as a regular statement.
      *
      * @param string $query The sql for the recordset
      * @param array $params An optional associative array if you want a prepared statement
-     * @return PDO_STATEMENT
+     * @return bool|PDOStatement
      */
-    function getRecordSet($query, $params = null) {
+    function getRecordSet(string $query, $params = null) {
         if (is_array($params)) {
-            $this->stmt = $this->conn->prepare($query);
+            $this->stmt = $this->dbConn->prepare($query);
             $this->stmt->execute($params);
         } else {
-            $this->stmt = $this->conn->query($query);
+            $this->stmt = $this->dbConn->query($query);
         }
         return $this->stmt;
     }
