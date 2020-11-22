@@ -27,16 +27,27 @@
     <hr>
     <h2>Available API Endpoints</h2>
 
-    <div>
+    <div id="api-endpoints">
         <h4>/api</h4>
         <p>Returns information on the API including all available endpoints</p>
         <p>No parameters</p>
         <p>No authentication required</p>
-        <p>
-            curl http://localhost/part1/api
-            <small>{ "message": "Welcome to the CHI2018 API!", "author": "Thomas Griffiths", "endpoints": [ "api", "help", "login", "update" ] }</small>
-        </p>
+        <p>curl http://localhost/part1/api</p>
     </div>
+
+    <hr>
+
+    <?php
+     echo "HELLO WORLD";
+    ?>
+
+    <?php
+    use api\APIEndpoints;
+
+    $endpoints = new APIEndpoints();
+        echo $endpoints->getEndpointsJSON();
+    ?>
+
 </body>
 
 </html>
