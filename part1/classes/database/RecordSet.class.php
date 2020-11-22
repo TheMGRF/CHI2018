@@ -1,4 +1,5 @@
 <?php
+namespace database;
 
 /**
  * Abstract class that creates a database connection and returns a recordset

@@ -1,4 +1,7 @@
 <?php
+namespace database;
+
+use PDO;
 
 class JSONRecordSet extends RecordSet {
 

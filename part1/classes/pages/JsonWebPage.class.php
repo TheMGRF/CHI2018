@@ -1,7 +1,8 @@
 <?php
 namespace pages;
 
-use JSONRecordSet;
+use api\APIEndpoints;
+use database\JSONRecordSet;
 
 /**
  * Creates a JSON web page based on the supplied parameters
@@ -10,8 +11,7 @@ use JSONRecordSet;
  */
 class JsonWebPage implements Pageable {
 
-    const END_POINTS = ["api", "help", "login", "update"];
-
+    private $apiEndpoints;
     private $recordSet;
     private $page;
 
@@ -22,17 +22,25 @@ class JsonWebPage implements Pageable {
      */
     public function __construct(array $pathArg) {
         $path = (empty($pathArg[3])) ? "api" : $pathArg[3];
+
+        $this->apiEndpoints = new APIEndpoints();
         $this->recordSet = new JSONRecordSet(DATABASE);
 
         switch ($path) {
             case "api":
                 $this::setPage($this::info());
                 break;
+            case "endpoints":
+                $this::setPage($this::endpoints());
+                break;
             case "help":
                 $this::setPage($this::help());
                 break;
             case "login":
                 $this::setPage($this::login());
+                break;
+            case "logout":
+                $this::setPage($this::logout());
                 break;
             case "update":
                 $this::setPage($this::update());
@@ -51,8 +59,13 @@ class JsonWebPage implements Pageable {
         return json_encode([
             "message" => "Welcome to the CHI2018 API!",
             "author" => "Thomas Griffiths",
-            "endpoints" => $this::END_POINTS
+            "endpoints" => $this->apiEndpoints->getEndpointsRoutes()
         ]);
+    }
+
+    private function endpoints() {
+        http_response_code(200);
+        return json_encode(["endpoints" => $this->apiEndpoints->getEndpointsJSON()]);
     }
 
     private function help() {
@@ -62,6 +75,10 @@ class JsonWebPage implements Pageable {
     }
 
     private function login() {
+        return json_encode(["logged-in" => false]);
+    }
+
+    private function logout() {
         return json_encode(["logged-in" => false]);
     }
 
