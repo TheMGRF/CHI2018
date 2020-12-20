@@ -3,6 +3,7 @@ namespace pages;
 
 use api\APIEndpoints;
 use database\JSONRecordSet;
+use function MongoDB\BSON\toJSON;
 
 /**
  * Creates a JSON web page based on the supplied parameters
@@ -99,7 +100,34 @@ class JsonWebPage implements Pageable {
     }
 
     private function login() {
-        return json_encode(["logged-in" => false]);
+        //$msg = "Invalid request. Username and password required";
+        $msg = "Default";
+        $status = 400;
+        $token = null;
+        $input = json_decode(file_get_contents("php://input"));
+
+        if (isset($input->email) && isset($input->password)) {
+            $query  = "SELECT username, password FROM users WHERE email LIKE :email";
+            $params = ["email" => $input->email];
+            $res = json_decode($this->recordSet->getJSONRecordSet($query, $params), true);
+            //$password = ($res['count']) ? $res['data'][0]['password'] : null;
+            $password = $res['data'][0]['password'];
+
+            if (password_verify($input->password, $password)) {
+                $msg = "User authorised. Welcome ". $res['data'][0]['username'] . "!";
+                $status = 200;
+                $token = "1234";
+            } else {
+                $msg = "username or password are invalid";
+                $status = 401;
+            }
+        }
+
+         return json_encode([
+             "status" => $status,
+             "message" => $msg,
+             "token" => $token
+         ]);
     }
 
     private function logout() {

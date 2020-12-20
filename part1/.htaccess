@@ -3,14 +3,18 @@ RewriteEngine On
 #example.com/page will display the contents of example.com/page.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.+)$ index.html [L,QSA]
-RewriteRule ^([^.]+)$ index.php [NC,L]
+#RewriteCond %{REQUEST_FILENAME}.html -f
+#RewriteRule ^(.+)$ index.html [L,QSA]
+#RewriteRule ^([^.]+)$ index.php [NC,L]
 
 #Turn example.com/page.html to example.com/page
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*\.html\ HTTP/
-RewriteRule ^(.*)\.html$ /$1 [R=301,L]
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*\.html\ HTTP/
+#RewriteRule ^(.*)\.html$ /$1 [R=301,L]
+
+RewriteRule ^(.*)$ index.php
 
 #Custom error pages
+ErrorDocument 500 /eror/
 ErrorDocument 404 404.php
+ErrorDocument 403 /eror/
 ErrorDocument 401 401.php
