@@ -15,7 +15,15 @@ class APIEndpoints {
         $this->addEndpoint(new APIEndpoint("/api/login", "", [], false, ""));
         $this->addEndpoint(new APIEndpoint("/api/logout", "", [], false, ""));
         $this->addEndpoint(new APIEndpoint("/api/update", "", [], false, ""));
-        $this->addEndpoint(new APIEndpoint("/api/authors", "Get a list of all authors at CHI2018", ["name", "id"], false, "/api/authors?name=Mark&id=1337"));
+        $this->addEndpoint(new APIEndpoint("/api/authors", "Get a list of all authors at CHI2018", ["name", "id"], false, "/api/authors?name=Mark&id=1337&limit=5"));
+        $this->addEndpoint(new APIEndpoint("/api/contentauthors", "Get content and author IDs with their associated with institutions.", ["contentId", "authorId"], false, "/api/contentauthors?contentId=6145"));
+        $this->addEndpoint(new APIEndpoint("/api/slots", "Get all session slots.", ["type", "id"], false, "/api/slots?type=SESSION"));
+        $this->addEndpoint(new APIEndpoint("/api/users", "Get all website users.", ["username", "email", "admins"], false, "/api/users?username=John"));
+        $this->addEndpoint(new APIEndpoint("/api/content", "Get the content abstracts and titles.", ["id"], false, "/api/content?id=6145"));
+        $this->addEndpoint(new APIEndpoint("/api/rooms", "Get all available rooms at the convention", ["id"], false, "/api/rooms?id=10042"));
+        $this->addEndpoint(new APIEndpoint("/api/sessiontypes", "Get the types of sessions", ["id"], false, "/api/sessiontypes?id=10061"));
+        $this->addEndpoint(new APIEndpoint("/api/sessions", "Get all convention sessions and associated IDs", ["sessionId", "typeId", "roomId", "chairId", "slotId"], false, "/api/sessions?sessionId=2375"));
+        $this->addEndpoint(new APIEndpoint("/api/sessionscontent", "Get session IDs and their content IDs", ["sessionId", "contentId"], false, "/api/sessionscontent?sessionId=2375"));
     }
 
     /**
