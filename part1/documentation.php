@@ -37,17 +37,6 @@
 
     <hr>
 
-    <?php
-     echo "HELLO WORLD";
-    ?>
-
-    <?php
-    use api\APIEndpoints;
-
-    $endpoints = new APIEndpoints();
-        echo $endpoints->getEndpointsJSON();
-    ?>
-
 </body>
 
 </html>

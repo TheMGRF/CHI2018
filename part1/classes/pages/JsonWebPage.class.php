@@ -48,6 +48,30 @@ class JsonWebPage implements Pageable {
             case "authors":
                 $this::setPage($this::authors());
                 break;
+            case "contentauthors":
+                $this::setPage($this::contentAuthors());
+                break;
+            case "slots":
+                $this::setPage($this::slots());
+                break;
+            case "users":
+                $this::setPage($this::users());
+                break;
+            case "content":
+                $this::setPage($this::content());
+                break;
+            case "rooms":
+                $this::setPage($this::rooms());
+                break;
+            case "sessiontypes":
+                $this::setPage($this::sessionTypes());
+                break;
+            case "sessions":
+                $this::setPage($this::sessions());
+                break;
+            case "sessionscontent":
+                $this::setPage($this::sessionsContent());
+                break;
             default:
                 $this::setPage($this::defaultMessage());
                 break;
@@ -93,6 +117,128 @@ class JsonWebPage implements Pageable {
             $query = $this->search($query, "name", $_REQUEST["name"]);
         } else if (isset($_REQUEST["id"])) {
             $query = $this->search($query, "authorId", $_REQUEST["id"]);
+        }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function contentAuthors() {
+        $query = "SELECT * FROM `content_authors`";
+
+        if (isset($_REQUEST["contentId"])) {
+            $query = $this->search($query, "contentId", $_REQUEST["contentId"]);
+        } else if (isset($_REQUEST["authorId"])) {
+            $query = $this->search($query, "authorId", $_REQUEST["authorId"]);
+        }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function slots() {
+        $query = "SELECT * FROM `slots`";
+
+        if (isset($_REQUEST["type"])) {
+            $query = $this->search($query, "type", $_REQUEST["type"]);
+        } else if (isset($_REQUEST["id"])) {
+            $query = $this->search($query, "slotId", $_REQUEST["id"]);
+        }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function users() {
+        $query = "SELECT * FROM `users`";
+
+        if (isset($_REQUEST["username"])) {
+            $query = $this->search($query, "username", $_REQUEST["username"]);
+        } else if (isset($_REQUEST["email"])) {
+            $query = $this->search($query, "email", $_REQUEST["email"]);
+        } else if (isset($_REQUEST["admins"])) {
+            $query = $this->search($query, "admin", 1);
+        }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function content() {
+        $query = "SELECT * FROM `content`";
+
+        if (isset($_REQUEST["id"])) {
+            $query = $this->search($query, "contentId", $_REQUEST["id"]);
+        }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function rooms() {
+        $query = "SELECT * FROM `rooms`";
+
+        if (isset($_REQUEST["id"])) {
+            $query = $this->search($query, "roomId", $_REQUEST["id"]);
+        }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function sessionTypes() {
+        $query = "SELECT * FROM `session_types`";
+
+        if (isset($_REQUEST["id"])) {
+            $query = $this->search($query, "typeId", $_REQUEST["id"]);
+        }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function sessions() {
+        $query = "SELECT * FROM `sessions`";
+
+        if (isset($_REQUEST["sessionId"])) {
+            $query = $this->search($query, "sessionId", $_REQUEST["sessionId"]);
+        } else if (isset($_REQUEST["typeId"])) {
+            $query = $this->search($query, "typeId", $_REQUEST["typeId"]);
+        } else if (isset($_REQUEST["roomId"])) {
+            $query = $this->search($query, "roomId", $_REQUEST["roomId"]);
+        } else if (isset($_REQUEST["chairId"])) {
+            $query = $this->search($query, "chairId", $_REQUEST["chairId"]);
+        } else if (isset($_REQUEST["slotId"])) {
+            $query = $this->search($query, "slotId", $_REQUEST["slotId"]);
+        }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function sessionsContent() {
+        $query = "SELECT * FROM `sessions_content`";
+
+        if (isset($_REQUEST["sessionId"])) {
+            $query = $this->search($query, "sessionId", $_REQUEST["sessionId"]);
+        } else if (isset($_REQUEST["contentId"])) {
+            $query = $this->search($query, "contentId", $_REQUEST["contentId"]);
         }
         if (isset($_REQUEST["limit"])) {
             $query = $this->limit($query, $_REQUEST["limit"]);
