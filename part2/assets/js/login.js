@@ -1,10 +1,10 @@
-let myJSON = {"email": "john@example.com", "password": "johnpassword"};
+let myJSON = {"email":"john@example.com","password":"johnpassword"};
 
 const postJSON = (api) => {
     fetch(api, {
         method: 'POST',
         headers: new Headers(),
-        body: JSON.stringify(myJSON.toString())
+        body: JSON.stringify(myJSON)
     })
         .then(
             function (response) {
@@ -21,4 +21,4 @@ const postJSON = (api) => {
         );
 }
 
-postJSON("http://localhost/part1/api/login/");
+postJSON("http://localhost/part1/api/login");

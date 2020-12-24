@@ -3,7 +3,6 @@ namespace pages;
 
 use api\APIEndpoints;
 use database\JSONRecordSet;
-use function MongoDB\BSON\toJSON;
 
 /**
  * Creates a JSON web page based on the supplied parameters
@@ -100,6 +99,8 @@ class JsonWebPage implements Pageable {
     }
 
     private function login() {
+        $this->post();
+
         //$msg = "Invalid request. Username and password required";
         $msg = "Default";
         $status = 400;
@@ -309,6 +310,12 @@ class JsonWebPage implements Pageable {
 
     private function limit(string $query, int $limit) {
         return $query . " LIMIT " . $limit;
+    }
+
+    private function post() {
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        header("Access-Control-Allow-Methods: GET, POST");
     }
 }
 
