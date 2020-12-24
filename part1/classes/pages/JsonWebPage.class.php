@@ -176,6 +176,8 @@ class JsonWebPage implements Pageable {
             $query = $this->search($query, "type", $_REQUEST["type"]);
         } else if (isset($_REQUEST["id"])) {
             $query = $this->search($query, "slotId", $_REQUEST["id"]);
+        } else if (isset($_REQUEST["day"])) {
+            $query = $this->search($query, "dayString", $_REQUEST["day"]);
         }
         if (isset($_REQUEST["limit"])) {
             $query = $this->limit($query, $_REQUEST["limit"]);

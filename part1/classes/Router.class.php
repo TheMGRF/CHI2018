@@ -27,6 +27,8 @@ class Router {
 
         $path = (empty($pathArr[2])) ? "main" : $pathArr[2];
 
+        header("Access-Control-Allow-Origin: *");
+
         ($path == "api") ? $this->api_route($pathArr) : $this->html_route($path);
     }
 
