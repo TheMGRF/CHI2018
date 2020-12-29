@@ -27,7 +27,8 @@ export default class Sessions extends React.Component {
     }
 
     componentDidMount() {
-        const url = "http://localhost/part1/api/sessions";
+        //const url = "http://localhost/part1/api/sessions";
+        const url = "http://localhost/part1/api/sessionsbeforeday?day=5";
 
         fetch(url)
             .then((res) => res.json())

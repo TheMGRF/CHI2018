@@ -69,6 +69,9 @@ class JsonWebPage implements Pageable {
             case "sessions":
                 $this::setPage($this::sessions());
                 break;
+            case "sessionsbeforeday":
+                $this::setPage($this::sessionsBeforeDay());
+                break;
             case "sessionscontent":
                 $this::setPage($this::sessionsContent());
                 break;
@@ -256,6 +259,28 @@ class JsonWebPage implements Pageable {
         } else if (isset($_REQUEST["slotId"])) {
             $query = $this->search($query, "slotId", $_REQUEST["slotId"]);
         }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    /**
+     * Example: SELECT sessionId FROM `sessions` INNER JOIN `slots` ON sessions.slotId=slots.slotId WHERE slots.dayInt < 3;
+     *
+     * @return string
+     */
+    private function sessionsBeforeDay() {
+        $query = "SELECT * FROM `sessions` INNER JOIN `slots`";
+
+        $before = 7;
+        if (isset($_REQUEST["day"])) {
+            $before = $_REQUEST["day"];
+        }
+
+        $query .= "ON sessions.slotId=slots.slotId WHERE slots.dayInt < $before";
+
         if (isset($_REQUEST["limit"])) {
             $query = $this->limit($query, $_REQUEST["limit"]);
         }
