@@ -9,3 +9,27 @@ body {
 .App {
     text-align: center;
 }
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    max-width: 100%;
+    table-layout: fixed ;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    max-width: 20%;
+}
+
+.session {
+    text-align: center;
+    margin: 0 25% 0 25%;
+}
+
+.sessionTable {
+    width: 100%;
+    text-align: center;
+}

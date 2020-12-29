@@ -1,15 +1,16 @@
 import "./Styles.css"
 import Nav from "./nav/Nav.js";
-import Session from "./Session";
 import Slots from "./slots/Slots";
-import Slot from "./slots/Slot";
+import Sessions from "./sessions/Sessions";
 
 function App() {
   return (
     <div className="App">
       <Nav />
 
-      <Session sessionId={"2375"}/>
+      <br/>
+
+      <Sessions/>
       <hr/>
       <Slots/>
 

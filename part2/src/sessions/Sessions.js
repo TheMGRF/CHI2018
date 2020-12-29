@@ -1,7 +1,7 @@
 import React from 'react';
-import Slot from "./Slot";
+import Session from "./Session";
 
-export default class Slots extends React.Component {
+export default class Sessions extends React.Component {
 
     constructor(props) {
         super(props);
@@ -14,22 +14,20 @@ export default class Slots extends React.Component {
     render() {
         return (
             this.state.data.map(slot => {
-                return <Slot
+                return <Session
+                    sessionId={slot.sessionId}
+                    name={slot.name}
+                    typeId={slot.typeId}
+                    roomId={slot.roomId}
+                    chairId={slot.chairId}
                     slotId={slot.slotId}
-                    type={slot.type}
-                    dayInt={slot.dayInt}
-                    dayString={slot.dayString}
-                    startHour={slot.startHour}
-                    startMinute={slot.startMinute}
-                    endHour={slot.endHour}
-                    endMinute={slot.endMinute}
                 />
             })
         )
     }
 
     componentDidMount() {
-        const url = "http://localhost/part1/api/slots";
+        const url = "http://localhost/part1/api/sessions";
 
         fetch(url)
             .then((res) => res.json())
