@@ -1,7 +1,25 @@
+h1 {
+    position: absolute;
+    color: black;
+    margin: 4% 40% 0 44%;
+    font-size: 4em;
+}
+
+#header {
+    width: 100%;
+    height: 250px;
+
+    background-image: url("./header.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #navBar {
     margin: 0;
     padding: 0;
-    background-color: #282c34;
+    background: rgb(201,132,254);
+    background: linear-gradient(90deg, rgba(201,132,254,1) 0%, rgba(123,137,253,1) 96%);
 }
 
 #nav {
@@ -9,7 +27,8 @@
     margin: 0;
     padding: 0 24% 0 24%;
     overflow: hidden;
-    background-color: #282c34;
+    background: rgb(201,132,254);
+    background: linear-gradient(90deg, rgba(201,132,254,1) 0%, rgba(123,137,253,1) 96%);
 }
 
 #nav li {
@@ -27,13 +46,17 @@
 }
 
 #nav li a:hover:not(.active) {
-    background-color: #111;
+    background-color: #6600cc;
 
     border-radius: 0 0 5px 5px;
+
+    transition: background-color 0.5s;
 }
 
 #nav .active {
-    background-color: #ecda48;
-    border-radius: 0 0 5px 5px;
+    background-color: #f2f2f2;
+    border-radius: 5px 5px 0 0;
     color: black;
+
+    transition: background-color 0.5s;
 }

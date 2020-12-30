@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
 
 body {
-    background-color: #282c34;
+    background-color: #f2f2f2;
     font-family: 'Raleway', sans-serif;
-    color: white;
+    color: black;
 }
 
-.App {
-    text-align: center;
-}
+/*.App {
+    text-align: center
+}*/
 
 table {
     font-family: arial, sans-serif;
@@ -27,15 +27,64 @@ td, th {
 .session {
     text-align: left;
     line-height: 1em;
-    margin: 0 25% 2% 25%;
+    margin: 2% 2% 2% 2%;
 
-    padding: 15px;
-    background-color: #414453;
-    border-radius: 3px;
-    box-shadow: 5px 5px 5px #1b1d22;
+    padding: 1%;
+    background: rgb(201,132,254);
+    background: linear-gradient(142deg, rgba(201,132,254,1) 0%, rgba(123,137,253,1) 96%);
+    color: white;
+    border-radius: 5px;
 }
 
 .sessionTable {
     width: 100%;
     text-align: center;
+}
+
+#all-days {
+    margin: 0 20% 0 20%;
+    text-align: left;
+}
+
+.day-display {
+    transition: visibility 1s, opacity 1s linear;
+    margin-left: 2%;
+}
+
+.day-display-btn {
+    text-align: center;
+    background: #c984fe;
+    border: none;
+    border-radius: 2px;
+    padding: 10px;
+    margin-top: 2%;
+
+    transition: background-color 0.5s;
+}
+
+.day-display-btn:hover {
+    background: #9262b8;
+    cursor: pointer;
+
+    transition: background-color 0.5s;
+}
+
+#Monday {
+    visibility: hidden;
+    display: none;
+}
+
+#Tuesday {
+    visibility: hidden;
+    display: none;
+}
+
+#Wednesday {
+    visibility: hidden;
+    display: none;
+}
+
+#Thursday {
+    visibility: hidden;
+    display: none;
 }

@@ -75,6 +75,9 @@ class JsonWebPage implements Pageable {
             case "sessionids":
                 $this->setPage($this->sessionIDs());
                 break;
+            case "sessionsonday":
+                $this->setPage($this->sessionsOnDay());
+                break;
             case "sessionsbeforeday":
                 $this->setPage($this->sessionsBeforeDay());
                 break;
@@ -302,6 +305,38 @@ FROM
         return $this->recordSet->getJSONRecordSet($query . ";", []);
     }
 
+    private function sessionsOnDay() {
+        $query = "
+SELECT DISTINCT
+  sessions.sessionId,
+  sessions_content.contentId,
+  session_types.name AS 'type', 
+  content.title, 
+  content.abstract, 
+  content.award, 
+  authors.name as 'chair', 
+  rooms.name as 'room'
+FROM 
+  `sessions` 
+  INNER JOIN `slots` ON sessions.slotId = slots.slotId
+  INNER JOIN `session_types` ON sessions.typeId = session_types.typeId 
+  INNER JOIN `sessions_content` ON sessions.sessionId = sessions_content.sessionId 
+  INNER JOIN `content` ON content.contentId = sessions_content.contentId 
+  INNER JOIN `authors` ON sessions.chairId = authors.authorId 
+  INNER JOIN `rooms` ON sessions.roomId = rooms.roomId 
+";
+
+        if (isset($_REQUEST["day"])) {
+            $query = $this->search($query, "dayString", $_REQUEST["day"]);
+        }
+
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
     /**
      * Example: SELECT sessionId FROM `sessions` INNER JOIN `slots` ON sessions.slotId=slots.slotId WHERE slots.dayInt < 3;
      *
@@ -315,6 +350,7 @@ SELECT DISTINCT
   session_types.name AS 'type', 
   content.title, 
   content.abstract, 
+  content.award, 
   authors.name as 'chair', 
   rooms.name as 'room'
 FROM 

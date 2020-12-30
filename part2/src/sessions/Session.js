@@ -6,32 +6,36 @@ export default class Session extends React.Component {
         super(props);
 
         this.state = {
-            sessionId:1,
-            contentId:1,
-            type:"",
-            title:"",
-            author:"",
-            abstract:"",
-            chair:"",
-            room:"",
-            data:[]
+            sessionId: 1,
+            contentId: 1,
+            type: "",
+            title: "",
+            author: "",
+            abstract: "",
+            award: "",
+            chair: "",
+            room: "",
+            data: []
         }
     }
 
     render() {
+        let awardSlot;
+        if (this.props.award) {
+            awardSlot = <p><b>Award:</b> {this.props.award}</p>
+        }
+
         return (
             <div className="session" id={this.props.sessionId}>
                 <h3>{this.props.title}</h3>
 
                 <p>
-                    <b>Authors: </b>
-                    {
-                        this.state.data.map(data => <span>{data.name}, </span>)
-                    }
+                    <b>Authors: </b> {this.state.data.map(data => <span>{data.name}, </span>)}
                 </p>
 
                 <p><b>Type:</b> {this.props.type}</p>
                 <p><b>Abstract:</b> {this.props.abstract}</p>
+                {awardSlot}
                 <p><b>Chair:</b> {this.props.chair}</p>
                 <p><b>Room:</b> {this.props.room}</p>
             </div>
@@ -44,8 +48,6 @@ export default class Session extends React.Component {
         fetch(url)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data.data)
-                console.log(data.data[0])
                 this.setState({data: data.data})
             })
             .catch((err) => {

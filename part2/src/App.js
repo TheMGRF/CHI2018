@@ -1,21 +1,31 @@
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./Styles.css"
 import Nav from "./nav/Nav.js";
-import Slots from "./slots/Slots";
-import Sessions from "./sessions/Sessions";
+import Schedule from './Schedule';
 
 function App() {
-  return (
-    <div className="App">
-      <Nav />
+    return (
+        <Router>
+            <div className="App">
+                <Nav/>
 
-      <br/>
+                <Switch>
+                    <Route path="/">
+                        <Schedule/>
+                    </Route>
+                    <Route path="/authors">
 
-      <Sessions/>
-      <hr/>
-      <Slots/>
+                    </Route>
+                    <Route path="/admin">
 
-    </div>
-  );
+                    </Route>
+                    <Route path="/about">
+
+                    </Route>
+                </Switch>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
