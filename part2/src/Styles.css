@@ -25,8 +25,14 @@ td, th {
 }
 
 .session {
-    text-align: center;
-    margin: 0 25% 0 25%;
+    text-align: left;
+    line-height: 1em;
+    margin: 0 25% 2% 25%;
+
+    padding: 15px;
+    background-color: #414453;
+    border-radius: 3px;
+    box-shadow: 5px 5px 5px #1b1d22;
 }
 
 .sessionTable {

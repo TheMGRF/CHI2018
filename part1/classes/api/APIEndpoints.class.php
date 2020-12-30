@@ -23,6 +23,8 @@ class APIEndpoints {
         $this->addEndpoint(new APIEndpoint("/api/rooms", "Get all available rooms at the convention", ["id"], false, "/api/rooms?id=10042"));
         $this->addEndpoint(new APIEndpoint("/api/sessiontypes", "Get the types of sessions", ["id"], false, "/api/sessiontypes?id=10061"));
         $this->addEndpoint(new APIEndpoint("/api/sessions", "Get all convention sessions and associated IDs", ["sessionId", "typeId", "roomId", "chairId", "slotId"], false, "/api/sessions?sessionId=2375"));
+        $this->addEndpoint(new APIEndpoint("/api/sessionids", "Get a list of all session IDs", [], false, "/api/sessionsids?limit=32"));
+        $this->addEndpoint(new APIEndpoint("/api/sessionsbeforeday", "Get a list of session info before a specified day.", ["day"], false, "/api/sessionsbeforeday?day=6"));
         $this->addEndpoint(new APIEndpoint("/api/sessionscontent", "Get session IDs and their content IDs", ["sessionId", "contentId"], false, "/api/sessionscontent?sessionId=2375"));
     }
 

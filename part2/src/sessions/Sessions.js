@@ -16,11 +16,13 @@ export default class Sessions extends React.Component {
             this.state.data.map(slot => {
                 return <Session
                     sessionId={slot.sessionId}
-                    name={slot.name}
-                    typeId={slot.typeId}
-                    roomId={slot.roomId}
-                    chairId={slot.chairId}
-                    slotId={slot.slotId}
+                    contentId={slot.contentId}
+                    type={slot.type}
+                    title={slot.title}
+                    author="N/A"
+                    abstract={slot.abstract}
+                    chair={slot.chair}
+                    room={slot.room}
                 />
             })
         )

@@ -28,55 +28,61 @@ class JsonWebPage implements Pageable {
 
         switch ($path) {
             case "api":
-                $this::setPage($this::info());
+                $this->setPage($this->info());
                 break;
             case "endpoints":
-                $this::setPage($this::endpoints());
+                $this->setPage($this->endpoints());
                 break;
             case "help":
-                $this::setPage($this::help());
+                $this->setPage($this->help());
                 break;
             case "login":
-                $this::setPage($this::login());
+                $this->setPage($this->login());
                 break;
             case "logout":
-                $this::setPage($this::logout());
+                $this->setPage($this->logout());
                 break;
             case "update":
-                $this::setPage($this::update());
+                $this->setPage($this->update());
                 break;
             case "authors":
-                $this::setPage($this::authors());
+                $this->setPage($this->authors());
                 break;
             case "contentauthors":
-                $this::setPage($this::contentAuthors());
+                $this->setPage($this->contentAuthors());
+                break;
+            case "authorsforcontent":
+                $this->setPage($this->authorsForContent());
                 break;
             case "slots":
-                $this::setPage($this::slots());
+                $this->setPage($this->slots());
                 break;
             case "users":
-                $this::setPage($this::users());
+                $this->setPage($this->users());
                 break;
             case "content":
-                $this::setPage($this::content());
+                $this->setPage($this->content());
                 break;
             case "rooms":
-                $this::setPage($this::rooms());
+                $this->setPage($this->rooms());
                 break;
             case "sessiontypes":
-                $this::setPage($this::sessionTypes());
+                $this->setPage($this->sessionTypes());
                 break;
             case "sessions":
-                $this::setPage($this::sessions());
+                $this->setPage($this->sessions());
+                break;
+            case "sessionids":
+                $this->setPage($this->sessionIDs());
                 break;
             case "sessionsbeforeday":
-                $this::setPage($this::sessionsBeforeDay());
+                $this->setPage($this->sessionsBeforeDay());
                 break;
             case "sessionscontent":
-                $this::setPage($this::sessionsContent());
+                $this->setPage($this->sessionsContent());
                 break;
             default:
-                $this::setPage($this::defaultMessage());
+                $this->setPage($this->defaultMessage());
                 break;
         }
     }
@@ -111,14 +117,14 @@ class JsonWebPage implements Pageable {
         $input = json_decode(file_get_contents("php://input"));
 
         if (isset($input->email) && isset($input->password)) {
-            $query  = "SELECT username, password FROM users WHERE email LIKE :email";
+            $query = "SELECT username, password FROM users WHERE email LIKE :email";
             $params = ["email" => $input->email];
             $res = json_decode($this->recordSet->getJSONRecordSet($query, $params), true);
             //$password = ($res['count']) ? $res['data'][0]['password'] : null;
             $password = $res['data'][0]['password'];
 
             if (password_verify($input->password, $password)) {
-                $msg = "User authorised. Welcome ". $res['data'][0]['username'] . "!";
+                $msg = "User authorised. Welcome " . $res['data'][0]['username'] . "!";
                 $status = 200;
                 $token = "1234";
             } else {
@@ -127,11 +133,11 @@ class JsonWebPage implements Pageable {
             }
         }
 
-         return json_encode([
-             "status" => $status,
-             "message" => $msg,
-             "token" => $token
-         ]);
+        return json_encode([
+            "status" => $status,
+            "message" => $msg,
+            "token" => $token
+        ]);
     }
 
     private function logout() {
@@ -168,6 +174,26 @@ class JsonWebPage implements Pageable {
         if (isset($_REQUEST["limit"])) {
             $query = $this->limit($query, $_REQUEST["limit"]);
         }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function authorsForContent() {
+        $query = "
+SELECT
+  name
+FROM
+  `authors`
+  INNER JOIN `content_authors` ON content_authors.authorId = authors.authorId
+  INNER JOIN `sessions_content` ON sessions_content.contentId = content_authors.contentId
+";
+
+        $val = "4672";
+        if (isset($_REQUEST["contentId"])) {
+            $val = $_REQUEST["contentId"];
+        }
+
+        $query .= "WHERE sessions_content.contentId = $val";
 
         return $this->recordSet->getJSONRecordSet($query . ";", []);
     }
@@ -266,20 +292,47 @@ class JsonWebPage implements Pageable {
         return $this->recordSet->getJSONRecordSet($query . ";", []);
     }
 
+    private function sessionIDs() {
+        $query = "SELECT sessionId FROM `sessions`";
+
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
     /**
      * Example: SELECT sessionId FROM `sessions` INNER JOIN `slots` ON sessions.slotId=slots.slotId WHERE slots.dayInt < 3;
      *
      * @return string
      */
     private function sessionsBeforeDay() {
-        $query = "SELECT * FROM `sessions` INNER JOIN `slots`";
+        $query = "
+SELECT DISTINCT
+  sessions.sessionId,
+  sessions_content.contentId,
+  session_types.name AS 'type', 
+  content.title, 
+  content.abstract, 
+  authors.name as 'chair', 
+  rooms.name as 'room'
+FROM 
+  `sessions` 
+  INNER JOIN `slots` ON sessions.slotId = slots.slotId
+  INNER JOIN `session_types` ON sessions.typeId = session_types.typeId 
+  INNER JOIN `sessions_content` ON sessions.sessionId = sessions_content.sessionId 
+  INNER JOIN `content` ON content.contentId = sessions_content.contentId 
+  INNER JOIN `authors` ON sessions.chairId = authors.authorId 
+  INNER JOIN `rooms` ON sessions.roomId = rooms.roomId 
+";
 
         $before = 7;
         if (isset($_REQUEST["day"])) {
             $before = $_REQUEST["day"];
         }
 
-        $query .= "ON sessions.slotId=slots.slotId WHERE slots.dayInt < $before";
+        $query .= "WHERE slots.dayInt < $before";
 
         if (isset($_REQUEST["limit"])) {
             $query = $this->limit($query, $_REQUEST["limit"]);
