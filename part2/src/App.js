@@ -1,7 +1,10 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./Styles.css"
 import Nav from "./nav/Nav.js";
-import Schedule from './Schedule';
+import Schedule from './pages/Schedule';
+import Authors from "./pages/Authors";
+import PageNotFound from "./pages/PageNotFound";
+import Admin from "./pages/Admin";
 
 function App() {
     return (
@@ -10,17 +13,17 @@ function App() {
                 <Nav/>
 
                 <Switch>
-                    <Route path="/">
+                    <Route exact path="/">
                         <Schedule/>
                     </Route>
-                    <Route path="/authors">
-
+                    <Route exact path="/authors">
+                        <Authors/>
                     </Route>
-                    <Route path="/admin">
-
+                    <Route exact path="/admin">
+                        <Admin/>
                     </Route>
-                    <Route path="/about">
-
+                    <Route path="*">
+                        <PageNotFound/>
                     </Route>
                 </Switch>
             </div>

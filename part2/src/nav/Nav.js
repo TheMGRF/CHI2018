@@ -1,6 +1,12 @@
 import React from 'react';
 import './nav.css';
+import {Link} from "react-router-dom";
 
+/**
+ * Global navigation bar for the site
+ *
+ * @author Thomas Griffiths
+ */
 export default class Nav extends React.Component {
     render() {
         return (
@@ -9,13 +15,12 @@ export default class Nav extends React.Component {
                 {/*<div id="header"></div>*/}
 
                 <ul id="nav">
-                    <li><a href="/" className="active">Schedule</a></li>
-                    <li><a href="/authors">Authors</a></li>
-                    <li><a href="/admin">Admin</a></li>
+                    <li><Link to="/" id="schedule" /*className="active"*/>Schedule</Link></li>
+                    <li><Link to="/authors" id="authors">Authors</Link></li>
+                    <li><Link to="/admin" id="admin">Admin</Link></li>
                     <li><a href="//localhost/part1/api/" target="_blank" rel="noreferrer">About</a></li>
                 </ul>
             </div>
         )
     }
-
 }

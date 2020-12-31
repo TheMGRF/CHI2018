@@ -60,3 +60,34 @@ h1 {
 
     transition: background-color 0.5s;
 }
+
+#error {
+    margin: 14% 35% 0 35%;
+    padding: 2% 0 2% 0;
+    border-radius: 2px;
+
+    text-align: center;
+
+    background: rgb(201,132,254);
+    background: linear-gradient(90deg, rgba(201,132,254,1) 0%, rgba(123,137,253,1) 96%);
+}
+
+#error-text {
+    color: white;
+}
+
+#safety {
+    text-decoration: none;
+    background-color: white;
+    border-radius: 2px;
+    padding: 2%;
+
+    transition: background-color 0.5s, color 0.5s;
+}
+
+#safety:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: white;
+
+    transition: background-color 0.5s, color 0.5s;
+}

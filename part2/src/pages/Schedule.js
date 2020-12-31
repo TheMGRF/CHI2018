@@ -1,5 +1,5 @@
 import React from 'react';
-import EnableDay from "./EnableDay";
+import EnableDay from "../EnableDay";
 
 export default class Schedule extends React.Component {
 
