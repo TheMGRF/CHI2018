@@ -5,8 +5,8 @@ export default class Nav extends React.Component {
     render() {
         return (
             <div className="navBar">
-                <h1>CHI 2018</h1>
-                <div id="header"></div>
+                {/*<h1>CHI 2018</h1>*/}
+                {/*<div id="header"></div>*/}
 
                 <ul id="nav">
                     <li><a href="/" className="active">Schedule</a></li>

@@ -315,7 +315,12 @@ SELECT DISTINCT
   content.abstract, 
   content.award, 
   authors.name as 'chair', 
-  rooms.name as 'room'
+  rooms.name as 'room',
+  slots.startHour,
+  slots.startMinute,
+  slots.endHour,
+  slots.endMinute
+
 FROM 
   `sessions` 
   INNER JOIN `slots` ON sessions.slotId = slots.slotId

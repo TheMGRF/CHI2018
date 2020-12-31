@@ -24,6 +24,8 @@ export default class Sessions extends React.Component {
                     award={slot.award}
                     chair={slot.chair}
                     room={slot.room}
+                    start={slot.startHour + ":" + slot.startMinute}
+                    end={slot.endHour + ":" + slot.endMinute}
                 />
             })
         )

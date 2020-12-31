@@ -38,6 +38,7 @@ export default class Session extends React.Component {
                 {awardSlot}
                 <p><b>Chair:</b> {this.props.chair}</p>
                 <p><b>Room:</b> {this.props.room}</p>
+                <p><b>Times: </b> {this.props.start} - {this.props.end}</p>
             </div>
         )
     }
