@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
+
+body {
+    background-color: #f2f2f2;
+    font-family: 'Raleway', sans-serif;
+    color: black;
+}
+
+::selection {
+    color: white;
+    background: #C984FE;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+
+    background-color: #676767;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgb(201, 132, 254);
+    background: linear-gradient(142deg, rgba(201, 132, 254, 1) 0%, rgba(123, 137, 253, 1) 96%);
+
+    height: 120px;
+}
+
+
+/*.App {
+    text-align: center
+}*/
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    max-width: 100%;
+    table-layout: fixed ;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    max-width: 20%;
+}
+
+.session {
+    text-align: left;
+    line-height: 1em;
+    margin: 2% 2% 2% 2%;
+
+    padding: 1%;
+    background: rgb(201, 132, 254);
+    background: linear-gradient(142deg, rgba(201, 132, 254, 1) 0%, rgba(123, 137, 253, 1) 96%);
+    color: white;
+    border-radius: 5px;
+}
+
+.sessionTable {
+    width: 100%;
+    text-align: center;
+}
+
+#all-days {
+    /*margin: 0 20% 0 20%;*/
+    /*text-align: left;*/
+    text-align: center;
+}
+
+#all-days ul {
+    list-style: none;
+}
+
+.day-display {
+    transition: visibility 1s, opacity 1s linear;
+
+    margin-left: 10%;
+
+    width: 80%;
+}
+
+.day-display-btn {
+    text-align: center;
+    background: #c984fe;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    padding: 10px;
+    margin-top: 2%;
+    width: 25%;
+
+    transition: background-color 0.5s;
+}
+
+.day-display-btn:hover {
+    background: #9262b8;
+    cursor: pointer;
+
+    transition: background-color 0.5s;
+}
+
+#Monday {
+    visibility: hidden;
+    display: none;
+}
+
+#Tuesday {
+    visibility: hidden;
+    display: none;
+}
+
+#Wednesday {
+    visibility: hidden;
+    display: none;
+}
+
+#Thursday {
+    visibility: hidden;
+    display: none;
+}

@@ -1,0 +1,93 @@
+h1 {
+    position: absolute;
+    color: black;
+    margin: 4% 40% 0 44%;
+    font-size: 4em;
+}
+
+#header {
+    width: 100%;
+    height: 250px;
+
+    background-image: url("./header.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#navBar {
+    margin: 0;
+    padding: 0;
+    background: rgb(201,132,254);
+    background: linear-gradient(90deg, rgba(201,132,254,1) 0%, rgba(123,137,253,1) 96%);
+}
+
+#nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 24% 0 24%;
+    overflow: hidden;
+    background: rgb(201,132,254);
+    background: linear-gradient(90deg, rgba(201,132,254,1) 0%, rgba(123,137,253,1) 96%);
+}
+
+#nav li {
+    float: left;
+
+    margin: 0 4% 0 4%;
+}
+
+#nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 55px 15px 55px;
+    text-decoration: none;
+}
+
+#nav li a:hover:not(.active) {
+    background-color: #6600cc;
+
+    border-radius: 0 0 5px 5px;
+
+    transition: background-color 0.5s;
+}
+
+#nav .active {
+    background-color: #f2f2f2;
+    border-radius: 5px 5px 0 0;
+    color: black;
+
+    transition: background-color 0.5s;
+}
+
+#error {
+    margin: 14% 35% 0 35%;
+    padding: 2% 0 2% 0;
+    border-radius: 2px;
+
+    text-align: center;
+
+    background: rgb(201,132,254);
+    background: linear-gradient(90deg, rgba(201,132,254,1) 0%, rgba(123,137,253,1) 96%);
+}
+
+#error-text {
+    color: white;
+}
+
+#safety {
+    text-decoration: none;
+    background-color: white;
+    border-radius: 2px;
+    padding: 2%;
+
+    transition: background-color 0.5s, color 0.5s;
+}
+
+#safety:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: white;
+
+    transition: background-color 0.5s, color 0.5s;
+}
