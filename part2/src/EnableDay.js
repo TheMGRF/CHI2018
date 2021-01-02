@@ -7,7 +7,6 @@ export default class EnableDay extends React.Component {
         super(props);
 
         this.state = { showing: false };
-
     }
 
     render() {
@@ -17,9 +16,7 @@ export default class EnableDay extends React.Component {
             <div className="day-display">
                 <button className="day-display-btn" onClick={() => this.setState({ showing: !showing})}>{this.props.day}</button>
                 <br/>
-                {
-                    this.state.showing ? <Sessions day={this.props.day}/> : null
-                }
+                { this.state.showing ? <Sessions day={this.props.day}/> : null }
             </div>
         )
     }

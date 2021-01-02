@@ -308,7 +308,7 @@ FROM
     private function sessionsOnDay() {
         $query = "
 SELECT DISTINCT
-  sessions.sessionId,
+  sessions.sessionId AS 'sessionId',
   sessions_content.contentId,
   session_types.name AS 'type', 
   content.title, 
@@ -333,7 +333,9 @@ FROM
 
         if (isset($_REQUEST["day"])) {
             $query = $this->search($query, "dayString", $_REQUEST["day"]);
-        }
+        } else if (isset($_REQUEST["sessionId"])) {
+            $query = $this->search($query, "sessionId", $_REQUEST["sessionId"]);
+        } // TODO: Issue here ^
 
         if (isset($_REQUEST["limit"])) {
             $query = $this->limit($query, $_REQUEST["limit"]);
