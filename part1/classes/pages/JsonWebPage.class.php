@@ -48,6 +48,9 @@ class JsonWebPage implements Pageable {
             case "authors":
                 $this->setPage($this->authors());
                 break;
+            case "chairs":
+                $this->setPage($this->chairs());
+                break;
             case "contentauthors":
                 $this->setPage($this->contentAuthors());
                 break;
@@ -83,6 +86,9 @@ class JsonWebPage implements Pageable {
                 break;
             case "sessionscontent":
                 $this->setPage($this->sessionsContent());
+                break;
+            case "sessioncontent":
+                $this->setPage($this->sessionContent());
                 break;
             default:
                 $this->setPage($this->defaultMessage());
@@ -152,7 +158,10 @@ class JsonWebPage implements Pageable {
     }
 
     private function authors() {
-        $query = "SELECT * FROM `authors`";
+        $query = "
+SELECT authors.authorId, name, contentId FROM `authors`
+INNER JOIN `content_authors` ON content_authors.authorId = authors.authorId
+";
 
         if (isset($_REQUEST["name"])) {
             $query = $this->search($query, "name", $_REQUEST["name"]);
@@ -162,6 +171,12 @@ class JsonWebPage implements Pageable {
         if (isset($_REQUEST["limit"])) {
             $query = $this->limit($query, $_REQUEST["limit"]);
         }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function chairs() {
+        $query = "SELECT name FROM x"; // TODO:
 
         return $this->recordSet->getJSONRecordSet($query . ";", []);
     }
@@ -202,7 +217,7 @@ FROM
     }
 
     private function slots() {
-        $query = "SELECT * FROM `slots`";
+        $query = "SELECT * FROM `slots` LEFT JOIN `sessions` ON slots.slotId = sessions.slotId";
 
         if (isset($_REQUEST["type"])) {
             $query = $this->search($query, "type", $_REQUEST["type"]);
@@ -309,8 +324,10 @@ FROM
         $query = "
 SELECT DISTINCT
   sessions.sessionId,
+  sessions.slotId,
   sessions_content.contentId,
   session_types.name AS 'type', 
+  sessions.name AS 'name',
   content.title, 
   content.abstract, 
   content.award, 
@@ -327,12 +344,18 @@ FROM
   INNER JOIN `session_types` ON sessions.typeId = session_types.typeId 
   INNER JOIN `sessions_content` ON sessions.sessionId = sessions_content.sessionId 
   INNER JOIN `content` ON content.contentId = sessions_content.contentId 
-  INNER JOIN `authors` ON sessions.chairId = authors.authorId 
+  LEFT JOIN `authors` ON sessions.chairId = authors.authorId 
   INNER JOIN `rooms` ON sessions.roomId = rooms.roomId 
 ";
 
         if (isset($_REQUEST["day"])) {
             $query = $this->search($query, "dayString", $_REQUEST["day"]);
+        } else if (isset($_REQUEST["sessionId"])) {
+            $query = $this->search($query, "sessionId", $_REQUEST["sessionId"]);
+        } // TODO: Issue here ^
+
+        if (isset($_REQUEST["day"]) && isset($_REQUEST["slotId"])) {
+            $query .= " AND sessions.slotId = " . $_REQUEST["slotId"];
         }
 
         if (isset($_REQUEST["limit"])) {
@@ -389,6 +412,29 @@ FROM
             $query = $this->search($query, "sessionId", $_REQUEST["sessionId"]);
         } else if (isset($_REQUEST["contentId"])) {
             $query = $this->search($query, "contentId", $_REQUEST["contentId"]);
+        }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function sessionContent() {
+        $query = "
+SELECT
+  sessions.name,
+  sessions_content.sessionId,
+  title,
+  abstract,
+  award
+FROM
+  `sessions_content`
+  INNER JOIN `content` ON sessions_content.contentId = content.contentId
+  INNER JOIN `sessions` ON sessions.sessionId = sessions_content.sessionId
+";
+        if (isset($_REQUEST["contentId"])) {
+            $query .= " WHERE sessions_content.contentId = " . $_REQUEST["contentId"];
         }
         if (isset($_REQUEST["limit"])) {
             $query = $this->limit($query, $_REQUEST["limit"]);

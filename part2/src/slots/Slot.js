@@ -13,8 +13,7 @@ export default class Slot extends React.Component {
             startHour:"",
             startMinute:"",
             endHour:"",
-            endMinute:"",
-            data:[]
+            endMinute:""
         }
     }
 

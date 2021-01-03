@@ -1,4 +1,5 @@
 import React from 'react';
+import SessionInfo from "./SessionInfo";
 
 export default class Session extends React.Component {
 
@@ -6,45 +7,28 @@ export default class Session extends React.Component {
         super(props);
 
         this.state = {
+            showing: false,
             sessionId: 1,
             contentId: 1,
-            type: "",
             title: "",
-            author: "",
-            abstract: "",
-            award: "",
-            chair: "",
-            room: "",
             data: []
         }
     }
 
     render() {
-        let awardSlot;
-        if (this.props.award) {
-            awardSlot = <p><b>Award:</b> {this.props.award}</p>
-        }
+        const {showing} = this.state;
 
         return (
-            <div className="session" id={this.props.sessionId}>
-                <h3>{this.props.title}</h3>
+            <div className="session" id={this.props.details.sessionId}>
+                <h3 className="session-info-expander" onClick={() => this.setState({showing: !showing})}>{this.props.details.title} &#9660;</h3>
 
-                <p>
-                    <b>Authors: </b> {this.state.data.map(data => <span>{data.name}, </span>)}
-                </p>
-
-                <p><b>Type:</b> {this.props.type}</p>
-                <p><b>Abstract:</b> {this.props.abstract}</p>
-                {awardSlot}
-                <p><b>Chair:</b> {this.props.chair}</p>
-                <p><b>Room:</b> {this.props.room}</p>
-                <p><b>Times: </b> {this.props.start} - {this.props.end}</p>
+                {showing ? <SessionInfo details={this.props.details} authorsExist={this.state.data} authors={this.state.data.map(data => <span>{data.name}, </span>)}/> : null}
             </div>
         )
     }
 
     componentDidMount() {
-        const url = "http://localhost/part1/api/authorsforcontent?contentId=" + this.props.contentId + "&limit=1";
+        const url = "http://localhost/part1/api/authorsforcontent?contentId=" + this.props.details.contentId + "&limit=1";
 
         fetch(url)
             .then((res) => res.json())
@@ -54,6 +38,6 @@ export default class Session extends React.Component {
             .catch((err) => {
                 console.log("Something went wrong: ", err)
             })
-    };
+    }
 
 }
