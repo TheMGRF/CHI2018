@@ -101,7 +101,9 @@ export default class Authors extends React.Component {
                 {
                     filteredData
                         .slice(((pageSize * page) - pageSize), (pageSize * page))
-                        .map((details, id) => (<Author key={id} details={details}/>))
+                        .map((details, id) => (
+                            <Author key={id} details={details}/>
+                        ))
                 }
 
                 <div id="author-buttons">
@@ -113,4 +115,7 @@ export default class Authors extends React.Component {
         );
     }
 
+    componentDidMount() {
+        this.searchDetails();
+    }
 }

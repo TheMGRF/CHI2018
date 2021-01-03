@@ -119,8 +119,7 @@ td, th {
     margin: 5% 25% 0 25%;
     text-align: center;
 
-    background: rgb(201, 132, 254);
-    background: linear-gradient(142deg, rgba(201, 132, 254, 1) 0%, rgba(123, 137, 253, 1) 96%);
+    background: rgb(152, 91, 203);
     color: white;
 
     min-height: 550px;
@@ -148,6 +147,10 @@ td, th {
     cursor: pointer;
 }
 
+.author-name {
+    cursor: pointer;
+}
+
 #page-indicator {
     padding: 0 2% 0 2%;
 }
@@ -168,8 +171,7 @@ td, th {
 }
 
 .modal-content {
-    background: rgb(201, 132, 254);
-    background: linear-gradient(142deg, rgba(201, 132, 254, 1) 0%, rgba(123, 137, 253, 1) 96%);
+    background: rgb(100, 43, 109);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -177,8 +179,13 @@ td, th {
     width: 60%;
 }
 
+.model-content-text {
+    margin-left: 9%;
+    width: 80%;
+}
+
 .close {
-    color: #aaaaaa;
+    color: #FFFFFF;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -196,4 +203,10 @@ td, th {
 
 .session-info-expander:hover {
     cursor: pointer;
+}
+
+hr {
+    background: #dddddd;
+    border: 2px solid;
+    border-radius: 2px;
 }

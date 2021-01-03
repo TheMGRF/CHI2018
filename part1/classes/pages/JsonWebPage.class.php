@@ -87,6 +87,9 @@ class JsonWebPage implements Pageable {
             case "sessionscontent":
                 $this->setPage($this->sessionsContent());
                 break;
+            case "sessioncontent":
+                $this->setPage($this->sessionContent());
+                break;
             default:
                 $this->setPage($this->defaultMessage());
                 break;
@@ -155,7 +158,10 @@ class JsonWebPage implements Pageable {
     }
 
     private function authors() {
-        $query = "SELECT * FROM `authors`";
+        $query = "
+SELECT authors.authorId, name, contentId FROM `authors`
+INNER JOIN `content_authors` ON content_authors.authorId = authors.authorId
+";
 
         if (isset($_REQUEST["name"])) {
             $query = $this->search($query, "name", $_REQUEST["name"]);
@@ -406,6 +412,29 @@ FROM
             $query = $this->search($query, "sessionId", $_REQUEST["sessionId"]);
         } else if (isset($_REQUEST["contentId"])) {
             $query = $this->search($query, "contentId", $_REQUEST["contentId"]);
+        }
+        if (isset($_REQUEST["limit"])) {
+            $query = $this->limit($query, $_REQUEST["limit"]);
+        }
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
+    private function sessionContent() {
+        $query = "
+SELECT
+  sessions.name,
+  sessions_content.sessionId,
+  title,
+  abstract,
+  award
+FROM
+  `sessions_content`
+  INNER JOIN `content` ON sessions_content.contentId = content.contentId
+  INNER JOIN `sessions` ON sessions.sessionId = sessions_content.sessionId
+";
+        if (isset($_REQUEST["contentId"])) {
+            $query .= " WHERE sessions_content.contentId = " . $_REQUEST["contentId"];
         }
         if (isset($_REQUEST["limit"])) {
             $query = $this->limit($query, $_REQUEST["limit"]);

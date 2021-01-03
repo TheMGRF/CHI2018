@@ -6,7 +6,7 @@ export default class Author extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { visible: false };
+        this.state = {visible: false};
 
         this.handleClick = this.handleClick.bind(this);
     }
@@ -20,13 +20,13 @@ export default class Author extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.handleClick}>{this.props.details.name}</button>
-                { !this.state.visible ? <AuthorModal details={this.props.details}/> : null }
+                <h3 className="author-name" onClick={this.handleClick}>{this.props.details.name}</h3>
+                {!this.state.visible ? <div onClick={this.handleClick}><AuthorModal details={this.props.details}/></div> : null}
             </div>
         )
     }
 
     componentDidMount() {
-        this.setState({ visible: !this.state.visible});
+        this.setState({visible: !this.state.visible});
     }
 }
