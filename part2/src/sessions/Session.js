@@ -1,4 +1,5 @@
 import React from 'react';
+import SessionInfo from "./SessionInfo";
 
 export default class Session extends React.Component {
 
@@ -6,39 +7,22 @@ export default class Session extends React.Component {
         super(props);
 
         this.state = {
+            showing: false,
             sessionId: 1,
             contentId: 1,
-            type: "",
             title: "",
-            author: "",
-            abstract: "",
-            award: "",
-            chair: "",
-            room: "",
             data: []
         }
     }
 
     render() {
-        let awardSlot;
-        if (this.props.details.award) {
-            awardSlot = <p><b>Award:</b> {this.props.details.award}</p>
-        }
+        const {showing} = this.state;
 
         return (
             <div className="session" id={this.props.details.sessionId}>
-                <h3>{this.props.details.title}</h3>
+                <h3 className="session-info-expander" onClick={() => this.setState({showing: !showing})}>{this.props.details.title} &#9660;</h3>
 
-                <p>
-                    <b>Authors: </b> {this.state.data.map(data => <span>{data.name}, </span>)}
-                </p>
-
-                <p><b>Type:</b> {this.props.details.type}</p>
-                <p><b>Abstract:</b> {this.props.details.abstract}</p>
-                {awardSlot}
-                <p><b>Chair:</b> {this.props.details.chair}</p>
-                <p><b>Room:</b> {this.props.details.room}</p>
-                <p><b>Times: </b> {this.props.start} - {this.props.end}</p>
+                {showing ? <SessionInfo details={this.props.details} authorsExist={this.state.data} authors={this.state.data.map(data => <span>{data.name}, </span>)}/> : null}
             </div>
         )
     }
@@ -54,6 +38,6 @@ export default class Session extends React.Component {
             .catch((err) => {
                 console.log("Something went wrong: ", err)
             })
-    };
+    }
 
 }

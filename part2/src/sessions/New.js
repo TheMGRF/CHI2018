@@ -1,14 +1,15 @@
 import React from 'react';
 import Session from "./Session";
+import Author from "../authors/Author";
 
-export default class Sessions extends React.Component {
+export default class New extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             page: 1,
-            pageSize: 3,
+            pageSize: 2,
             query: "",
             data: []
         }
@@ -41,31 +42,9 @@ export default class Sessions extends React.Component {
         let pageSize = this.state.pageSize;
         let page = this.state.page;
 
-        let buttons = noOfPages > 1 ? <div id="author-buttons">
-            <button onClick={this.handlePreviousClick} disabled={disabledPrevious}>Previous</button>
-            <span id="page-indicator">Page {this.state.page} of {noOfPages}</span>
-            <button onClick={this.handleNextClick} disabled={disabledNext}>Next</button>
-        </div> : null;
-
-
         return (
             <div>
-                {
-                    filteredData
-                        .slice(((pageSize * page) - pageSize), (pageSize * page))
-                        .map((details, id) => {
-                            return <div>
-                                <Session
-                                    key={id}
-                                    details={details}
-                                    start={details.startHour + ":" + details.startMinute}
-                                    end={details.endHour + ":" + details.endMinute}
-                                />
-                            </div>;
-                        })
-                }
-
-                {buttons}
+                <p>{this.props.day} | {this.props.name} | {this.props.slotId}</p>
             </div>
         )
     }
@@ -73,8 +52,8 @@ export default class Sessions extends React.Component {
     componentDidMount() {
         //const url = "http://localhost/part1/api/sessions";
         //const url = "http://localhost/part1/api/sessionsbeforeday?day=5";
-        //const url = "http://localhost/part1/api/sessionsonday?day=" + this.props.day;
-        const url = "http://localhost/part1/api/sessionsonday?day=" + this.props.day + "&slotId=" + this.props.slotId;
+        //const url = "http://localhost/part1/api/sessionsonday?day=" + ;
+        const url = "http://localhost/part1/api/sessionsonday?day=" + this.props.day + "&slotId=" + this.props.slotId
 
         fetch(url)
             .then((res) => res.json())
@@ -84,5 +63,5 @@ export default class Sessions extends React.Component {
             .catch((err) => {
                 console.log("Something went wrong: ", err)
             })
-    }
+    };
 }

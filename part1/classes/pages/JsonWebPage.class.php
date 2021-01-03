@@ -48,6 +48,9 @@ class JsonWebPage implements Pageable {
             case "authors":
                 $this->setPage($this->authors());
                 break;
+            case "chairs":
+                $this->setPage($this->chairs());
+                break;
             case "contentauthors":
                 $this->setPage($this->contentAuthors());
                 break;
@@ -166,6 +169,12 @@ class JsonWebPage implements Pageable {
         return $this->recordSet->getJSONRecordSet($query . ";", []);
     }
 
+    private function chairs() {
+        $query = "SELECT name FROM x"; // TODO:
+
+        return $this->recordSet->getJSONRecordSet($query . ";", []);
+    }
+
     private function contentAuthors() {
         $query = "SELECT * FROM `content_authors`";
 
@@ -202,7 +211,7 @@ FROM
     }
 
     private function slots() {
-        $query = "SELECT * FROM `slots`";
+        $query = "SELECT * FROM `slots` LEFT JOIN `sessions` ON slots.slotId = sessions.slotId";
 
         if (isset($_REQUEST["type"])) {
             $query = $this->search($query, "type", $_REQUEST["type"]);
@@ -308,9 +317,11 @@ FROM
     private function sessionsOnDay() {
         $query = "
 SELECT DISTINCT
-  sessions.sessionId AS 'sessionId',
+  sessions.sessionId,
+  sessions.slotId,
   sessions_content.contentId,
   session_types.name AS 'type', 
+  sessions.name AS 'name',
   content.title, 
   content.abstract, 
   content.award, 
@@ -327,7 +338,7 @@ FROM
   INNER JOIN `session_types` ON sessions.typeId = session_types.typeId 
   INNER JOIN `sessions_content` ON sessions.sessionId = sessions_content.sessionId 
   INNER JOIN `content` ON content.contentId = sessions_content.contentId 
-  INNER JOIN `authors` ON sessions.chairId = authors.authorId 
+  LEFT JOIN `authors` ON sessions.chairId = authors.authorId 
   INNER JOIN `rooms` ON sessions.roomId = rooms.roomId 
 ";
 
@@ -336,6 +347,10 @@ FROM
         } else if (isset($_REQUEST["sessionId"])) {
             $query = $this->search($query, "sessionId", $_REQUEST["sessionId"]);
         } // TODO: Issue here ^
+
+        if (isset($_REQUEST["day"]) && isset($_REQUEST["slotId"])) {
+            $query .= " AND sessions.slotId = " . $_REQUEST["slotId"];
+        }
 
         if (isset($_REQUEST["limit"])) {
             $query = $this->limit($query, $_REQUEST["limit"]);
