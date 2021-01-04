@@ -29,5 +29,6 @@ $ini['routes'] = parse_ini_file("routes.ini",true);
 define('BASEPATH', $ini['main']['paths']['basepath']);
 define('CSSPATH', $ini['main']['paths']['css']);
 define('DATABASE', $ini['main']['database']['dbname']);
+define('JWTKEY', $ini['main']['auth']['jwtkey'])
 
 ?>

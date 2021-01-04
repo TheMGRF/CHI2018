@@ -3,6 +3,7 @@ namespace pages;
 
 use api\APIEndpoints;
 use database\JSONRecordSet;
+use Firebase\JWT\JWT;
 
 /**
  * Creates a JSON web page based on the supplied parameters
@@ -129,13 +130,19 @@ class JsonWebPage implements Pageable {
             $query = "SELECT username, password FROM users WHERE email LIKE :email";
             $params = ["email" => $input->email];
             $res = json_decode($this->recordSet->getJSONRecordSet($query, $params), true);
-            //$password = ($res['count']) ? $res['data'][0]['password'] : null;
-            $password = $res['data'][0]['password'];
+            $password = $res["data"][0]["password"];
 
             if (password_verify($input->password, $password)) {
-                $msg = "User authorised. Welcome " . $res['data'][0]['username'] . "!";
+                $msg = "User authorised. Welcome " . $res["data"][0]["username"] . "!";
                 $status = 200;
-                $token = "1234";
+                $token = array();
+                $token["email"] = $input->email;
+                $token["username"] = $res["data"][0]["username"];
+                //$token["admin"] = $res["data"][0]["admin"];
+                $token['iat'] = time();
+                $token['exp'] = time() + 3600;
+                $jwtkey = JWTKEY;
+                $token = JWT::encode($token, $jwtkey);
             } else {
                 $msg = "username or password are invalid";
                 $status = 401;
@@ -154,7 +161,28 @@ class JsonWebPage implements Pageable {
     }
 
     private function update() {
-        return json_encode(["updated" => false]);
+        $input = json_decode(file_get_contents("php://input"));
+
+        if (!$input) {
+            return json_encode(array("status" => 400, "message" => "Invalid request"));
+        } else if (!isset($input->token)) {
+            return json_encode(array("status" => 401, "message" => "Not authorised"));
+        }
+        if (!isset($input->title) || !isset($input->sessionId)) {
+            return json_encode(array("status" => 400, "message" => "Invalid request"));
+        }
+
+        try {
+            $jwtkey = JWTKEY;
+            $tokenDecoded = JWT::decode($input->token, $jwtkey, array('HS256'));
+        } catch (UnexpectedValueException $e) {
+            return json_encode(array("status" => 401, "message" => $e->getMessage()));
+        }
+
+        $query = "UPDATE sessions SET title = :title WHERE sessionId = :sessionId";
+        $params = ["title" => $input->title, "sessionId" => $input->sessionId];
+        //$res = $this->recordSet->getJSONRecordSet($query, $params);
+        return json_encode(array("status" => 200, "message" => "ok"));
     }
 
     private function authors() {
