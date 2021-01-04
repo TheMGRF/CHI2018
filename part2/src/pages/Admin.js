@@ -11,7 +11,7 @@ export default class Admin extends React.Component {
             email: "",
             password: "",
             page: 1,
-            pageSize: 8,
+            pageSize: 4,
             query: "",
             data: []
         }
@@ -42,15 +42,15 @@ export default class Admin extends React.Component {
         this.postData(url, json, this.loginCallback);
     }
 
-    handleUpdateClick = () => {
+    handleUpdateClick = (sessionId, title) => {
         const url = "http://localhost/part1/api/update"
 
         if (localStorage.getItem("token")) {
             let token = localStorage.getItem("token");
             let json = {
                 "token": token,
-                "title": "Gender",
-                "sessionId": 2375
+                "title": title,
+                "sessionId": sessionId
             };
             this.postData(url, json, this.updateCallback);
         } else {
@@ -114,10 +114,12 @@ export default class Admin extends React.Component {
         let pageSize = this.state.pageSize;
         let page = this.state.page;
 
+        const authenticated = this.state.authenticated;
+
         let logInOut = <Login handleLoginClick={this.handleLoginClick} email={this.state.email}
                               password={this.props.password} handleEmail={this.handleEmail}
                               handlePassword={this.handlePassword}/>
-        if (this.state.authenticated) {
+        if (authenticated) {
             logInOut = <div>
                 <button id="logout-btn" onClick={this.handleLogoutClick}>Log Out</button>
             </div>
@@ -135,7 +137,15 @@ export default class Admin extends React.Component {
                         filteredData
                             .slice(((pageSize * page) - pageSize), (pageSize * page))
                             .map((details, id) => (
-                                <SessionUpdater id={id} title={details.title}/>
+                                <SessionUpdater
+                                    id={id}
+                                    key={id}
+                                    admin={authenticated}
+                                    contentId={details.contentId}
+                                    title={details.title}
+                                    handleUpdateClick={this.handleUpdateClick}
+                                    postData={this.postData}
+                                />
                             ))
                     }
 
@@ -168,19 +178,27 @@ export default class Admin extends React.Component {
 
 }
 
+/**
+ * Component for updating session titles through the API
+ * Note: Due to the pagination and how React is handling
+ * the updating the titles are automatically updated
+ * on key presses but the update buttons will still
+ * function to also send the API request to update too.
+ */
 class SessionUpdater extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            title: props.title
+            title: props.title,
+            data: []
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(nextProps) {
         if (nextProps.title !== this.props.title) {
-            this.setState({value: nextProps.title});
+            this.setState({title: nextProps.title});
         }
     }
 
@@ -191,13 +209,25 @@ class SessionUpdater extends React.Component {
                     className="session-name-box"
                     key={this.props.id}
                     value={this.state.title}
-                    onChange={event => this.setState({value: event.target.value})}
-                    defaultValue={this.state.title}
+                    onChange={event => this.setState({title: event.target.value})}
                 />
                 <br/>
-                <Update handleUpdateClick={this.handleUpdateClick}/>
+                <Update admin={this.props.admin} handleUpdateClick={this.props.handleUpdateClick} sessionId={this.state.data.sessionId}/>
             </div>
         )
+    }
+
+    componentDidMount() {
+        const url = "http://localhost/part1/api/sessioncontent?contentId=" + this.props.contentId;
+
+        fetch(url)
+            .then((res) => res.json())
+            .then((data) => {
+                this.setState({data: data.data[0]})
+            })
+            .catch((err) => {
+                console.log("Something went wrong: ", err)
+            })
     }
 
 }
