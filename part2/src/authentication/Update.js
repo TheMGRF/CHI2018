@@ -4,7 +4,7 @@ export default class Update extends React.Component {
 
     render() {
         return <div>
-            <button onClick={this.props.handleUpdateClick}>Update</button>
+            <button id="update-btn" onClick={this.props.handleUpdateClick}>Update</button>
         </div>
     }
 }
