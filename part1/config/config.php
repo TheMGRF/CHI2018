@@ -19,6 +19,19 @@ function exceptionHandler($e) {
     echo json_encode($usr_msg);
     logError($msg);
 }
+
+/**
+ * Log errors into a error log file
+ *
+ * @param array $msg The error to log
+ */
+function logError($msg) {
+    /*$logError = fopen("logs/errorLogs.txt", "w");
+    $content = $msg;
+    fwrite($logError, $content);
+    fclose($logError);*/
+}
+
 set_exception_handler('exceptionHandler');
 
 spl_autoload_register("autoLoadClasses");

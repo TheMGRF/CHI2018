@@ -9,3 +9,21 @@
 #header {
     text-align: center;
 }
+
+#sub-header {
+    text-align: center;
+}
+
+#api-endpoints {
+    width: 60%;
+    margin: 0 20% 0 20%;
+
+    text-align: center;
+}
+
+.code {
+    background-color: #14161a;
+    color: #ff8c00;
+    padding: 2px 5px;
+    border-radius: 5px;
+}

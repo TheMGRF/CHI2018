@@ -7,10 +7,10 @@ export default class Update extends React.Component {
 
         return (
             <div>
-                {admin ?
+                {admin > 0 ?
                     <button id="update-btn" onClick={this.props.handleUpdateClick(this.props.sessionId, this.props.title)}>Update</button>
                     :
-                    <button id="update-btn">DENIED</button>
+                    null
                 }
             </div>
         )

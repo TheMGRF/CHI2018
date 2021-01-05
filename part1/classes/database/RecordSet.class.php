@@ -1,6 +1,8 @@
 <?php
 namespace database;
 
+use PDOStatement;
+
 /**
  * Abstract class that creates a database connection and returns a recordset
  * Follows the recordset pattern

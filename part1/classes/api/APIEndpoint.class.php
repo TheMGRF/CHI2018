@@ -1,6 +1,13 @@
 <?php
 namespace api;
 
+/**
+ * Class APIEndpoint for storing information related
+ * to different API endpoints for easy documentation reasons
+ *
+ * @package api
+ * @author Thomas Griffiths
+ */
 class APIEndpoint {
 
     const EXAMPLE_PREFIX = "curl http://localhost/part1";

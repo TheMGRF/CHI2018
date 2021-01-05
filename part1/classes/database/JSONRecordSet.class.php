@@ -16,6 +16,7 @@ class JSONRecordSet extends RecordSet {
         $stmt = $this->getRecordSet($query, $params);
         $recordSet = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $nRecords = count($recordSet);
+        //return json_encode($recordSet); // should be this way :P
         return json_encode(array("count" => $nRecords, "data" => $recordSet));
     }
 
