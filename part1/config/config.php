@@ -12,7 +12,7 @@ function autoLoadClasses($className) {
 
 function exceptionHandler($e) {
     $msg = array("status" => "500", "message" => $e->getMessage(), "file" => $e->getFile(), "line" => $e->getLine());
-    $usr_msg = array("status" => "500", "message" => "Sorry! Internal server error");
+    $usr_msg = array("status" => "500", "message" => "Sorry! An error has occurred!");
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json; charset=UTF-8");
     header("Access-Control-Allow-Methods: GET, POST");

@@ -44,6 +44,7 @@ export default class Authors extends React.Component {
     /**
      * Search through the authors API endpoint by default with all
      * values available then filter down depending on the set query
+     * instead of using a client side filter.
      *
      * @param query The name of the author to search for
      */

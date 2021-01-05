@@ -140,7 +140,7 @@ class JsonWebPage implements Pageable {
                 $token["username"] = $res["data"][0]["username"];
                 $token["admin"] = $res["data"][0]["admin"];
                 $token['iat'] = time();
-                $token['exp'] = time() + 3600;
+                $token['exp'] = time() + 3600; // set a token expiration time of 1 hour
                 $jwtkey = JWTKEY;
                 $token = JWT::encode($token, $jwtkey);
             } else {
