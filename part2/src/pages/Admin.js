@@ -6,6 +6,7 @@ export default class Admin extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             authenticated: false,
             admin: 0,
@@ -60,7 +61,7 @@ export default class Admin extends React.Component {
     }
 
     handleLogoutClick = () => {
-        this.setState({authenticated: false})
+        this.setState({authenticated: false, admin: 0})
         localStorage.removeItem('token');
     }
 
@@ -69,6 +70,7 @@ export default class Admin extends React.Component {
         if (data.status === 200) {
             const {token} = data;
             this.setState({authenticated: true, admin: data.admin, token: token});
+            console.log("Is admin: " + data.admin);
             localStorage.setItem("token", token)
         }
     }
@@ -181,4 +183,13 @@ export default class Admin extends React.Component {
             })
     }
 
+    /**
+     * When the component will unmount.
+     * Fixes "Warning: Can't perform a React state update on an unmounted component"
+     */
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return;
+        };
+    }
 }

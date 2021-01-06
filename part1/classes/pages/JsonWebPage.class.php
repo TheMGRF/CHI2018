@@ -124,6 +124,7 @@ class JsonWebPage implements Pageable {
         $msg = "Default";
         $status = 400;
         $token = null;
+        $admin = 0;
         $input = json_decode(file_get_contents("php://input"));
 
         if (isset($input->email) && isset($input->password)) {
@@ -134,11 +135,12 @@ class JsonWebPage implements Pageable {
 
             if (password_verify($input->password, $password)) {
                 $msg = "User authorised. Welcome " . $res["data"][0]["username"] . "!";
+                $admin = $res["data"][0]["admin"];
                 $status = 200;
                 $token = array();
                 $token["email"] = $input->email;
                 $token["username"] = $res["data"][0]["username"];
-                $token["admin"] = $res["data"][0]["admin"];
+                $token["admin"] = $admin;
                 $token['iat'] = time();
                 $token['exp'] = time() + 3600; // set a token expiration time of 1 hour
                 $jwtkey = JWTKEY;
@@ -152,7 +154,8 @@ class JsonWebPage implements Pageable {
         return json_encode([
             "status" => $status,
             "message" => $msg,
-            "token" => $token
+            "token" => $token,
+            "admin" => $admin
         ]);
     }
 
