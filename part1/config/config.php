@@ -32,7 +32,7 @@ function logError($msg) {
     fclose($logError);*/
 }
 
-//set_exception_handler('exceptionHandler');
+set_exception_handler('exceptionHandler');
 
 spl_autoload_register("autoLoadClasses");
 
