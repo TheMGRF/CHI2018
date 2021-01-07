@@ -4,7 +4,7 @@ import React from 'react';
  * Login class to manage user email and password input
  * with a login button to forward to user confirmation.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Login extends React.Component {
 

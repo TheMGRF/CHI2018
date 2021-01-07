@@ -7,7 +7,7 @@ import Update from "../authentication/Update";
  * Note: Upon clicking the update buttons an API request
  * will be sent to update the session name in the DB.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class SessionUpdater extends React.Component {
 

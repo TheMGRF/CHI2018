@@ -4,7 +4,7 @@ import React from 'react';
  * SessionInfo class containing all the information respective
  * to a session to be displayed.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class SessionInfo extends React.Component {
 

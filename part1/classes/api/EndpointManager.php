@@ -1,12 +1,18 @@
 <?php
 namespace api;
 
+/**
+ * Class EndpointManager to grab all API endpoints.
+ *
+ * @package api
+ * @author Thomas Griffiths (W18013094)
+ */
 class EndpointManager {
 
     private $apiEndpoints;
 
     /**
-     * EndpointManager constructor.
+     * EndpointManager constructor to create a new instance.
      */
     public function __construct() {
         $this->apiEndpoints = new APIEndpoints();

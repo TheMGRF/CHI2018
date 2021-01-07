@@ -5,7 +5,7 @@ import Session from "./Session";
  * Sessions class to display a collection of Session classes
  * in a paginated system with a searchable query box.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Sessions extends React.Component {
 

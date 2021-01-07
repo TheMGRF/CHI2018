@@ -14,9 +14,7 @@ class Router {
     private $page;
 
     /**
-     * Router constructor.
-     *
-     * @param $pageType - can be "api" or "documentation"
+     * Router constructor to create URLs paths and arguments.
      */
     public function __construct() {
         $url = $_SERVER["REQUEST_URI"];
@@ -32,11 +30,21 @@ class Router {
         ($path == "api") ? $this->api_route($pathArr) : $this->html_route($path);
     }
 
-    public function api_route($pathArr) {
+    /**
+     * Set the page API route
+     *
+     * @param string $pathArr The API path route
+     */
+    public function api_route(string $pathArr) {
         $this->page = new JsonWebPage($pathArr);
     }
 
-    public function html_route($path) {
+    /**
+     * set the HTML page route
+     *
+     * @param string $path The HTML page route
+     */
+    public function html_route(string $path) {
         $ini['routes'] = parse_ini_file("config/routes.ini",true);
         $pageInfo = isset($path, $ini['routes'][$path])
             ? $ini['routes'][$path]
@@ -45,6 +53,11 @@ class Router {
         $this->page = new RoutedWebPage($pageInfo['route'], $pageInfo['title'], $pageInfo['heading1'], $pageInfo['title']);
     }
 
+    /**
+     * Get the page content
+     *
+     * @return mixed The page content
+     */
     public function getPage() {
         return $this->page->getPage();
     }

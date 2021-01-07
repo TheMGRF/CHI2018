@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 /**
  * Global navigation bar for the site
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Nav extends React.Component {
 

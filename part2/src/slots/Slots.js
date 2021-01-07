@@ -5,7 +5,7 @@ import Slot from "./Slot";
  * Slots class to display a list of slots and their
  * information directly from the API endpoint.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Slots extends React.Component {
 

@@ -4,7 +4,7 @@ import React from 'react';
  * Search class to take the user's input and pass it
  * to the parent handle search method.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Search extends React.Component {
 

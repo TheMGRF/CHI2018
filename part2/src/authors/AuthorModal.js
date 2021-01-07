@@ -4,7 +4,7 @@ import React from 'react';
  * AuthorModal class to create a popup modal to contain
  * information on an Author that can be hidden by default.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class AuthorModal extends React.Component {
 

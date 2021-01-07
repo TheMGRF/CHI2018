@@ -14,7 +14,12 @@ abstract class RecordSet {
     protected $dbConn;
     protected $stmt;
 
-    function __construct($dbname) {
+    /**
+     * RecordSet constructor to establish a DB connection.
+     *
+     * @param string $dbname The databe name to establish a connection with
+     */
+    function __construct(string $dbname) {
         $this->dbConn = DatabaseConnection::getConnection($dbname);
     }
 

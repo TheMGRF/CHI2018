@@ -7,7 +7,7 @@ import Author from "../authors/Author";
  * and clicking them to view more of their information at
  * the convention.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Authors extends React.Component {
 

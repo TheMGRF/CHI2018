@@ -4,7 +4,7 @@ import React from 'react';
  * Slot class to contain information on a specific
  * slot's information and display it back to the user.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Slot extends React.Component {
 

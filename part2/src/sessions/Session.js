@@ -5,7 +5,7 @@ import SessionInfo from "./SessionInfo";
  * Session class show session information if it is expanded
  * via clicking on the session title.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Session extends React.Component {
 

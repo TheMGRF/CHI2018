@@ -4,7 +4,7 @@ import EnableDay from "../EnableDay";
 /**
  * Schedule class to contain all the days to have available
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Schedule extends React.Component {
 

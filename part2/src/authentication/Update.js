@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * Update class to handle the updating of session names.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Update extends React.Component {
 

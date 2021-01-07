@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
  * A light weight 404 error page for when the Router
  * fails to find a valid page.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class PageNotFound extends React.Component {
 

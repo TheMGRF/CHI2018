@@ -19,30 +19,36 @@ abstract class WebPage implements IWebPage, Pageable {
      * @param string $header The header to display on the page
      * @param string $css A specific style sheet to link
      */
-    public function __construct($title, $header, $css) {
+    public function __construct(string $title, string $header, string $css) {
         $this->title = $title;
         $this->header = $header;
         $this->css = $css;
     }
 
     /**
-     * @return string
+     * Grab the title of the page.
+     *
+     * @return string The title of the page.
      */
-    public function getTitle() {
+    public function getTitle(): string {
         return $this->title;
     }
 
     /**
-     * @return string
+     * Grab the header of the page.
+     *
+     * @return string The header of the page.
      */
-    public function getHeader() {
+    public function getHeader(): string {
         return $this->header;
     }
 
     /**
-     * @return string
+     * Grab the associated CSS file to the page.
+     *
+     * @return string The CSS of the page.
      */
-    public function getCSS() {
+    public function getCSS(): string {
         return $this->css;
     }
 

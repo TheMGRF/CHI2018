@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Auto load the PHP classes into the application
+ *
+ * @param $className The class to load
+ */
 function autoLoadClasses($className) {
     $fileName = "classes\\" . strtolower($className) . ".class.php";
     $fileName = str_replace("\\", DIRECTORY_SEPARATOR, $fileName);
@@ -10,6 +15,11 @@ function autoLoadClasses($className) {
     }
 }
 
+/**
+ * Create a new exception handler
+ *
+ * @param string $e The error to pass
+ */
 function exceptionHandler($e) {
     $msg = array("status" => "500", "message" => $e->getMessage(), "file" => $e->getFile(), "line" => $e->getLine());
     $usr_msg = array("status" => "500", "message" => "Sorry! An error has occurred!");
@@ -25,7 +35,7 @@ function exceptionHandler($e) {
  *
  * @param array $msg The error to log
  */
-function logError($msg) {
+function logError(array $msg) {
     /*$logError = fopen("logs/errorLogs.txt", "w");
     $content = $msg;
     fwrite($logError, $content);

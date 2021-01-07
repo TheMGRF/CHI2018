@@ -4,6 +4,12 @@ namespace database;
 use PDO;
 use PDOException;
 
+/**
+ * Class DatabaseConnection to create the singleton DB getter.
+ *
+ * @package database
+ * @author Thomas Griffiths (W18013094)
+ */
 class DatabaseConnection {
 
     private static $dbConnection = null;

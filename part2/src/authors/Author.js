@@ -6,7 +6,7 @@ import AuthorModal from "./AuthorModal";
  * component to show author information on a user
  * click depending on if the state visible is true.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Author extends React.Component {
 

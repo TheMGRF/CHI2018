@@ -5,7 +5,7 @@ import ExpandedDay from "./sessions/ExpandedDay";
  * EnableDay class to create pages of expanded days if
  * they are visible and correspodning to the specified day.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class EnableDay extends React.Component {
 
