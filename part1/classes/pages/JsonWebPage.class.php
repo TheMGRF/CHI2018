@@ -40,9 +40,6 @@ class JsonWebPage implements Pageable {
             case "login":
                 $this->setPage($this->login());
                 break;
-            case "logout":
-                $this->setPage($this->logout());
-                break;
             case "update":
                 $this->setPage($this->update());
                 break;
@@ -120,8 +117,7 @@ class JsonWebPage implements Pageable {
     private function login() {
         $this->post();
 
-        //$msg = "Invalid request. Username and password required";
-        $msg = "Default";
+        $msg = "Invalid request. Username and password required";
         $status = 400;
         $token = null;
         $admin = 0;
@@ -131,22 +127,27 @@ class JsonWebPage implements Pageable {
             $query = "SELECT username, password, admin FROM users WHERE email LIKE :email";
             $params = ["email" => $input->email];
             $res = json_decode($this->recordSet->getJSONRecordSet($query, $params), true);
-            $password = $res["data"][0]["password"];
+            if ($res["data"] != null) {
+                $password = $res["data"][0]["password"];
 
-            if (password_verify($input->password, $password)) {
-                $msg = "User authorised. Welcome " . $res["data"][0]["username"] . "!";
-                $admin = $res["data"][0]["admin"];
-                $status = 200;
-                $token = array();
-                $token["email"] = $input->email;
-                $token["username"] = $res["data"][0]["username"];
-                $token["admin"] = $admin;
-                $token['iat'] = time();
-                $token['exp'] = time() + 3600; // set a token expiration time of 1 hour
-                $jwtkey = JWTKEY;
-                $token = JWT::encode($token, $jwtkey);
+                if (password_verify($input->password, $password)) {
+                    $msg = "User authorised. Welcome " . $res["data"][0]["username"] . "!";
+                    $admin = $res["data"][0]["admin"];
+                    $status = 200;
+                    $token = array();
+                    $token["email"] = $input->email;
+                    $token["username"] = $res["data"][0]["username"];
+                    $token["admin"] = $admin;
+                    $token['iat'] = time();
+                    $token['exp'] = time() + 3600; // set a token expiration time of 1 hour
+                    $jwtkey = JWTKEY;
+                    $token = JWT::encode($token, $jwtkey);
+                } else {
+                    $msg = "Invalid username or password";
+                    $status = 401;
+                }
             } else {
-                $msg = "username or password are invalid";
+                $msg = "Invalid username or password";
                 $status = 401;
             }
         }
@@ -159,10 +160,6 @@ class JsonWebPage implements Pageable {
         ]);
     }
 
-    private function logout() {
-        return json_encode(["logged-in" => false]);
-    }
-
     private function update() {
         $input = json_decode(file_get_contents("php://input"));
 
@@ -171,7 +168,7 @@ class JsonWebPage implements Pageable {
         } else if (!isset($input->token)) {
             return json_encode(array("status" => 401, "message" => "Not authorised"));
         }
-        if (!isset($input->title) || !isset($input->sessionId)) {
+        if (!isset($input->name) || !isset($input->sessionId)) {
             return json_encode(array("status" => 400, "message" => "Invalid request"));
         }
 
@@ -182,9 +179,9 @@ class JsonWebPage implements Pageable {
             return json_encode(array("status" => 401, "message" => $e->getMessage()));
         }
 
-        $query = "UPDATE sessions SET title = :title WHERE sessionId = :sessionId";
-        $params = ["title" => $input->title, "sessionId" => $input->sessionId];
-        //$res = $this->recordSet->getJSONRecordSet($query, $params);
+        $query = "UPDATE sessions SET name = :name WHERE sessionId = :sessionId";
+        $params = ["name" => $input->name, "sessionId" => $input->sessionId];
+        $res = $this->recordSet->getJSONRecordSet($query, $params);
         return json_encode(array("status" => 200, "message" => "ok"));
     }
 
@@ -340,6 +337,7 @@ FROM
     private function sessions() {
         $query = "SELECT * FROM `sessions`";
 
+        $params = [];
         if (isset($_REQUEST["sessionId"])) {
             $query = $this->search($query, "sessionId");
             $params = ["sessionId" => $_REQUEST["sessionId"]];

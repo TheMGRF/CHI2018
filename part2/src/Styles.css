@@ -287,3 +287,30 @@ hr {
 
     transition: background-color 0.5s;
 }
+
+#login-area {
+    text-align: center;
+}
+
+#login-area * {
+    margin-left: 10px;
+}
+
+#login-area input {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#login-area button {
+    background-color: #6600cc;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+}
+
+#login-area button:hover {
+    cursor: pointer;
+}

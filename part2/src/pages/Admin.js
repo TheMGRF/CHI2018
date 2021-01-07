@@ -44,22 +44,6 @@ export default class Admin extends React.Component {
         this.postData(url, json, this.loginCallback);
     }
 
-    handleUpdateClick = (sessionId, title) => {
-        const url = "http://localhost/part1/api/update"
-
-        if (localStorage.getItem("token")) {
-            let token = localStorage.getItem("token");
-            let json = {
-                "token": token,
-                "title": title,
-                "sessionId": sessionId
-            };
-            this.postData(url, json, this.updateCallback);
-        } else {
-            this.handleLogoutClick();
-        }
-    }
-
     handleLogoutClick = () => {
         this.setState({authenticated: false, admin: 0})
         localStorage.removeItem('token');
@@ -75,13 +59,6 @@ export default class Admin extends React.Component {
             if (data.admin > 0) {
                 localStorage.setItem("admin", data.admin);
             }
-        }
-    }
-
-    updateCallback = (data) => {
-        console.log(data)
-        if (data.status !== 200) {
-            this.handleLogoutClick();
         }
     }
 
@@ -102,9 +79,9 @@ export default class Admin extends React.Component {
         let logInOut = <Login handleLoginClick={this.handleLoginClick} email={this.state.email}
                               password={this.props.password} handleEmail={this.handleEmail}
                               handlePassword={this.handlePassword}/>
-        let editable = <p>Loading...</p>;
+        let editable = null;
 
-        if (authenticated) {
+        if (authenticated === true) {
             logInOut = <div>
                 <button id="logout-btn" onClick={this.handleLogoutClick}>Log Out</button>
             </div>
@@ -116,9 +93,9 @@ export default class Admin extends React.Component {
                         key={id}
                         authenticated={authenticated}
                         admin={admin}
-                        contentId={details.contentId}
-                        title={details.title}
-                        handleUpdateClick={this.handleUpdateClick}
+                        sessionId={details.sessionId}
+                        name={details.name}
+                        handleLogoutClick={this.handleLogoutClick}
                         postData={this.postData}
                         />
                     ))
@@ -141,18 +118,18 @@ export default class Admin extends React.Component {
     componentDidMount() {
         if (localStorage.getItem('token')) {
             this.setState({authenticated: true});
+
+            const url = "http://localhost/part1/api/sessions";
+
+            fetch(url)
+                .then((res) => res.json())
+                .then((data) => {
+                    this.setState({data: data.data});
+                })
+                .catch((err) => {
+                    console.log("Something went wrong: ", err)
+                })
         }
-
-        const url = "http://localhost/part1/api/content";
-
-        fetch(url)
-            .then((res) => res.json())
-            .then((data) => {
-                this.setState({data: data.data})
-            })
-            .catch((err) => {
-                console.log("Something went wrong: ", err)
-            })
     }
 
     /**

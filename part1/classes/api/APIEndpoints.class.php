@@ -13,7 +13,7 @@ class APIEndpoints {
         $this->addEndpoint(new APIEndpoint("/api/endpoints", "A list of available API endpoints", [], false, ""));
         $this->addEndpoint(new APIEndpoint("/api/help", "A good meme", [], false, ""));
         $this->addEndpoint(new APIEndpoint("/api/login", "Login to the system with an email and password in the request header", [], false, "/api/login"));
-        $this->addEndpoint(new APIEndpoint("/api/logout", "Logout of the system", [], true, "/api/logout"));
+        //$this->addEndpoint(new APIEndpoint("/api/logout", "Logout of the system", [], true, "/api/logout"));
         $this->addEndpoint(new APIEndpoint("/api/update", "Update a specific session title using its ID in the request header", [], true, "/api/update"));
         $this->addEndpoint(new APIEndpoint("/api/authors", "Get a list of all authors at CHI2018", ["name", "id"], false, "/api/authors?name=Mark&id=1337&limit=5"));
         $this->addEndpoint(new APIEndpoint("/api/contentauthors", "Get content and author IDs with their associated with institutions.", ["contentId", "authorId"], false, "/api/contentauthors?contentId=6145"));

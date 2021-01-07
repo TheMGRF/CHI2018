@@ -4,7 +4,7 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <div id="login-area">
                 <input
                     type='text'
                     placeholder='email'
