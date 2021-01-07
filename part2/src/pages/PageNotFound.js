@@ -9,6 +9,12 @@ import {Link} from "react-router-dom";
  */
 export default class PageNotFound extends React.Component {
 
+    /**
+     * The render method to create the JSX/HTML content
+     * for the page with class states and properties.
+     *
+     * @returns {JSX.Element} The fully rendered JSX object
+     */
     render() {
         return (
             <div id="error">

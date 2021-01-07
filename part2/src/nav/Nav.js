@@ -8,11 +8,16 @@ import {Link} from "react-router-dom";
  * @author Thomas Griffiths
  */
 export default class Nav extends React.Component {
+
+    /**
+     * The render method to create the JSX/HTML content
+     * for the page with class states and properties.
+     *
+     * @returns {JSX.Element} The fully rendered JSX object
+     */
     render() {
         return (
             <div className="navBar">
-                {/*<h1>CHI 2018</h1>*/}
-                {/*<div id="header"></div>*/}
 
                 <ul id="nav">
                     <li><Link to="/" id="schedule" /*className="active"*/>Schedule</Link></li>

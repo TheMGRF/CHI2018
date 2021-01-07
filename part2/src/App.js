@@ -6,6 +6,12 @@ import Authors from "./pages/Authors";
 import PageNotFound from "./pages/PageNotFound";
 import Admin from "./pages/Admin";
 
+/**
+ * Main app function to contain the React Router to
+ * manage the page switches.
+ *
+ * @returns {JSX.Element} The fully rendered JSX objects
+ */
 function App() {
     return (
         <Router>

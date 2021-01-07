@@ -1,7 +1,19 @@
 import React from 'react';
 
+/**
+ * AuthorModal class to create a popup modal to contain
+ * information on an Author that can be hidden by default.
+ *
+ * @author Thomas Griffiths
+ */
 export default class AuthorModal extends React.Component {
 
+    /**
+     * Constructor to create the class and bind the
+     * handling of the update click method.
+     *
+     * @param props The properties associated with the class
+     */
     constructor(props) {
         super(props);
 
@@ -11,6 +23,12 @@ export default class AuthorModal extends React.Component {
         }
     }
 
+    /**
+     * The render method to create the JSX/HTML content
+     * for the page with class states and properties.
+     *
+     * @returns {JSX.Element} The fully rendered JSX object
+     */
     render() {
         return (
             <div id={this.props.details.authorId} className="modal">
@@ -33,6 +51,12 @@ export default class AuthorModal extends React.Component {
         )
     }
 
+    /**
+     * Method for handling when the component mounts
+     * and sending an API call to fetch the class data
+     * containing information like name, ids, abstract and
+     * awards if they were given.
+     */
     componentDidMount() {
         const url = "http://localhost/part1/api/sessioncontent?contentId=" + this.props.details.contentId;
 
