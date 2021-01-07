@@ -210,3 +210,107 @@ hr {
     border: 2px solid;
     border-radius: 2px;
 }
+
+#admin-title {
+    margin: 2% 46% 1% 46%;
+    font-size: 3em;
+}
+
+#logout-btn {
+    background-color: #282c34;
+    border: none;
+    border-radius: 5px;
+    color: white;
+
+    width: 20%;
+    padding: 15px;
+    margin: 0 40% 0.5% 40%;
+
+    transition: background-color 1s;
+}
+
+#logout-btn:hover {
+    background-color: #14161a;
+    cursor: pointer;
+
+    transition: background-color 1s;
+}
+
+#session-names-collection {
+    margin-left: 28%;
+    width: 50%;
+}
+
+.session-name-box {
+    padding: 15px;
+    width: 40%;
+    height: 50px;
+    margin: 0 22% 0 22%;
+
+    border: 1px solid #888888;
+    border-radius: 5px;
+}
+
+#session-buttons {
+    margin: 0 28% 0 28%;
+}
+
+#session-buttons button {
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 2px;
+    padding: 10px 20px 10px 20px;
+}
+
+#session-buttons button:hover {
+    cursor: pointer;
+    background-color: #d4d4d4;
+}
+
+#update-btn {
+    border: none;
+    border-radius: 2px;
+    background-color: #6600cc;
+    color: white;
+
+    padding: 10px;
+    width: 20%;
+
+    margin: 0 33% 4% 33%;
+
+    transition: background-color 0.5s;
+}
+
+#update-btn:hover {
+    background-color: #771ed0;
+    cursor: pointer;
+
+    transition: background-color 0.5s;
+}
+
+#login-area {
+    text-align: center;
+}
+
+#login-area * {
+    margin-left: 10px;
+}
+
+#login-area input {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#login-area button {
+    background-color: #6600cc;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+}
+
+#login-area button:hover {
+    cursor: pointer;
+}

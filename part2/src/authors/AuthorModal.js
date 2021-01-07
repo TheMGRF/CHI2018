@@ -40,7 +40,6 @@ export default class AuthorModal extends React.Component {
             .then((res) => res.json())
             .then((data) => {
                 this.setState({data: data.data})
-
             })
             .catch((err) => {
                 console.log("Something went wrong: ", err)
