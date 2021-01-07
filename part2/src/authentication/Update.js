@@ -51,8 +51,6 @@ export default class Update extends React.Component {
     render() {
         const admin = this.props.admin;
 
-        console.log("Real Status: " + admin);
-
         return (
             <div>
                 {admin > 0 ?
@@ -62,9 +60,5 @@ export default class Update extends React.Component {
                 }
             </div>
         )
-    }
-
-    componentDidMount() {
-        console.log("Admin Status: " + this.props.admin);
     }
 }

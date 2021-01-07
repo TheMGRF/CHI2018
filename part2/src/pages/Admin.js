@@ -9,7 +9,7 @@ export default class Admin extends React.Component {
 
         this.state = {
             authenticated: false,
-            admin: 0,
+            admin: -1,
             email: "",
             password: "",
             page: 1,
@@ -89,14 +89,14 @@ export default class Admin extends React.Component {
                 {
                     data.map((details, id) => (
                         <SessionUpdater
-                        id={id}
-                        key={id}
-                        authenticated={authenticated}
-                        admin={admin}
-                        sessionId={details.sessionId}
-                        name={details.name}
-                        handleLogoutClick={this.handleLogoutClick}
-                        postData={this.postData}
+                            id={id}
+                            key={id}
+                            authenticated={authenticated}
+                            admin={admin >= 0 ? 1 : 0}
+                            sessionId={details.sessionId}
+                            name={details.name}
+                            handleLogoutClick={this.handleLogoutClick}
+                            postData={this.postData}
                         />
                     ))
                 }
