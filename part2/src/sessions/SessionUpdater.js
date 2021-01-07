@@ -23,7 +23,6 @@ export default class SessionUpdater extends React.Component {
     componentDidUpdate(nextProps) {
         if (nextProps.title !== this.props.title) {
             this.setState({title: nextProps.title});
-            console.log("Admeen: " + this.props.admin);
         }
     }
 
@@ -49,8 +48,6 @@ export default class SessionUpdater extends React.Component {
             .then((res) => res.json())
             .then((data) => {
                 this.setState({data: data.data[0]})
-                console.log("Authenticated: " + this.props.authenticated)
-                console.log("Admin: " + this.props.admin);
             })
             .catch((err) => {
                 console.log("Something went wrong: ", err)
