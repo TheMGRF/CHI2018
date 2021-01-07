@@ -1,8 +1,21 @@
 import React from 'react';
 import SessionInfo from "./SessionInfo";
 
+/**
+ * Session class show session information if it is expanded
+ * via clicking on the session title.
+ *
+ * @author Thomas Griffiths (W18013094)
+ */
 export default class Session extends React.Component {
 
+    /**
+     * Create the Session class with the state containing
+     * information to create a session an if the expanded
+     * information should be showing.
+     *
+     * @param props Empty optional props for Authors
+     */
     constructor(props) {
         super(props);
 
@@ -15,6 +28,12 @@ export default class Session extends React.Component {
         }
     }
 
+    /**
+     * The render method to create the JSX/HTML content
+     * for the page with class states and properties.
+     *
+     * @returns {JSX.Element} The fully rendered JSX object
+     */
     render() {
         const {showing} = this.state;
 
@@ -27,6 +46,11 @@ export default class Session extends React.Component {
         )
     }
 
+    /**
+     * Method for handling when the component mounts
+     * ad sending an API request to fetch authors
+     * corresponding to the content ID.
+     */
     componentDidMount() {
         const url = "http://localhost/part1/api/authorsforcontent?contentId=" + this.props.details.contentId + "&limit=1";
 

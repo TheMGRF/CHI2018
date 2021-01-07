@@ -2,8 +2,20 @@ import React from 'react';
 import Login from "../authentication/Login";
 import SessionUpdater from "../sessions/SessionUpdater";
 
+/**
+ * Admin class for handling the login component, API
+ * endpoints for login and the listing and updating
+ * of session names.
+ */
 export default class Admin extends React.Component {
 
+    /**
+     * Constructor to create the class, set the default
+     * state values and bind the handling of the
+     * update click method.
+     *
+     * @param props The properties associated with the class
+     */
     constructor(props) {
         super(props);
 
@@ -22,6 +34,13 @@ export default class Admin extends React.Component {
         this.handlePassword = this.handlePassword.bind(this);
     }
 
+    /**
+     * Post data method call to send the API call.
+     *
+     * @param url The URL endpoint
+     * @param json The JSON data to send
+     * @param callback The callback to associate with the call
+     */
     postData = (url, json, callback) => {
         fetch(url, {
             method: 'POST',
@@ -38,18 +57,33 @@ export default class Admin extends React.Component {
             );
     }
 
+    /**
+     * Handle the clicking of the login button to send the API
+     * call to log the user in with their entered email and
+     * password.
+     */
     handleLoginClick = () => {
         const url = "http://localhost/part1/api/login"
         let json = {"email": this.state.email, "password": this.state.password};
         this.postData(url, json, this.loginCallback);
     }
 
+    /**
+     * Handle the clicking of the logout button and subsequently
+     * remove the states, tokens, and admin tags from local storage.
+     */
     handleLogoutClick = () => {
         this.setState({authenticated: false, admin: 0})
         localStorage.removeItem('token');
         localStorage.removeItem('admin');
     }
 
+    /**
+     * The callback method for handling the login endpoint
+     * return and updating the class states and local storage.
+     *
+     * @param data The data returned by the API endpoint
+     */
     loginCallback = (data) => {
         console.log(data)
         if (data.status === 200) {
@@ -62,17 +96,36 @@ export default class Admin extends React.Component {
         }
     }
 
+    /**
+     * Handle the input of the password passing in
+     * the event value.
+     *
+     * @param e The event to pass
+     */
     handlePassword = (e) => {
         this.setState({password: e.target.value})
     }
 
+    /**
+     * Handle the input of the email passing in
+     * the event value.
+     *
+     * @param e The event to pass
+     */
     handleEmail = (e) => {
         this.setState({email: e.target.value})
     }
 
+    /**
+     * The render method to create the JSX/HTML content
+     * for the page with class states and properties.
+     *
+     * @returns {JSX.Element} The fully rendered JSX object
+     */
     render() {
         let data = this.state.data;
 
+        // Store authentication and admin values for repeat usage
         const authenticated = this.state.authenticated;
         const admin = localStorage.getItem("admin");
 
@@ -81,6 +134,7 @@ export default class Admin extends React.Component {
                               handlePassword={this.handlePassword}/>
         let editable = null;
 
+        // If the user is authenticated go ahead with showing logout and sessions
         if (authenticated === true) {
             logInOut = <div>
                 <button id="logout-btn" onClick={this.handleLogoutClick}>Log Out</button>
@@ -115,6 +169,10 @@ export default class Admin extends React.Component {
         );
     }
 
+    /**
+     * Method for handling when the component mounts and
+     * fetching session data from the API.
+     */
     componentDidMount() {
         if (localStorage.getItem('token')) {
             this.setState({authenticated: true});

@@ -1,7 +1,19 @@
 import React from 'react';
 
+/**
+ * SessionInfo class containing all the information respective
+ * to a session to be displayed.
+ *
+ * @author Thomas Griffiths (W18013094)
+ */
 export default class SessionInfo extends React.Component {
 
+    /**
+     * Create the SessionInfo class with the state containing
+     * information on the session.
+     *
+     * @param props Empty optional props for Authors
+     */
     constructor(props) {
         super(props);
 
@@ -15,7 +27,14 @@ export default class SessionInfo extends React.Component {
         }
     }
 
+    /**
+     * The render method to create the JSX/HTML content
+     * for the page with class states and properties.
+     *
+     * @returns {JSX.Element} The fully rendered JSX object
+     */
     render() {
+        // Set vars for information depending on if its set
         let awardSlot;
         if (this.props.details.award) {
             awardSlot = <p><b>Award:</b> {this.props.details.award}</p>;

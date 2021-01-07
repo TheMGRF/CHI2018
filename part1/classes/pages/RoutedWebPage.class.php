@@ -24,13 +24,17 @@ class RoutedWebPage extends WebPage {
     }
 
     /**
+     * Grab the route specified for the web page.
+     *
      * @return string
      */
-    public function getRoute() {
+    public function getRoute(): string {
         return $this->route;
     }
 
     /**
+     * Grab the content of the page from a file.
+     *
      * @return false|string
      */
     public function getPage() {

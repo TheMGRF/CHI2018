@@ -32,6 +32,8 @@
         <hr>
 
         <script>
+            // Create an API call to fetch all the available endpoints and
+            // then dynamically generate the endpoint data.
             const url = "http://localhost/part1/api/endpoints";
 
             fetch(url)

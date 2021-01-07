@@ -1,12 +1,18 @@
 <?php
 namespace api;
 
+/**
+ * Class APIEndpoints to store all available endpoints.
+ *
+ * @package api
+ * @author Thomas Griffiths (W18013094)
+ */
 class APIEndpoints {
 
     private $endpoints = [];
 
     /**
-     * APIEndpoints constructor.
+     * APIEndpoints constructor to assign and add all created API endpoints.
      */
     public function __construct() {
         $this->addEndpoint(new APIEndpoint("/api", "The main API page with API specific information.", [], false, "/api"));

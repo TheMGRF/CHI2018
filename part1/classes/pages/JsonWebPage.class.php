@@ -17,9 +17,10 @@ class JsonWebPage implements Pageable {
     private $page;
 
     /**
-     * JsonWebPage constructor.
+     * JsonWebPage constructor to set path and determine
+     * page vs API locations.
      *
-     * @param array $pathArg yes
+     * @param array $pathArg The passed path argument
      */
     public function __construct(array $pathArg) {
         $path = (empty($pathArg[3])) ? "api" : $pathArg[3];
@@ -27,15 +28,13 @@ class JsonWebPage implements Pageable {
         $this->apiEndpoints = new APIEndpoints();
         $this->recordSet = new JSONRecordSet(DATABASE);
 
+        // Choose which page to load depending on the path
         switch ($path) {
             case "api":
                 $this->setPage($this->info());
                 break;
             case "endpoints":
                 $this->setPage($this->endpoints());
-                break;
-            case "help":
-                $this->setPage($this->help());
                 break;
             case "login":
                 $this->setPage($this->login());
@@ -45,9 +44,6 @@ class JsonWebPage implements Pageable {
                 break;
             case "authors":
                 $this->setPage($this->authors());
-                break;
-            case "chairs":
-                $this->setPage($this->chairs());
                 break;
             case "contentauthors":
                 $this->setPage($this->contentAuthors());
@@ -94,6 +90,12 @@ class JsonWebPage implements Pageable {
         }
     }
 
+    /**
+     * Return JSON formatted info about the API and its
+     * endpoints.
+     *
+     * @return false|string The JSON formatted info
+     */
     private function info() {
         http_response_code(200);
         return json_encode([
@@ -103,17 +105,23 @@ class JsonWebPage implements Pageable {
         ]);
     }
 
+    /**
+     * Return a JSON formatted list of available endpoints
+     * associated with the API.
+     *
+     * @return false|string The JSON formatted list of endpoints
+     */
     private function endpoints() {
         http_response_code(200);
         return json_encode(["endpoints" => $this->apiEndpoints->getEndpointsJSON()]);
     }
 
-    private function help() {
-        http_response_code(200);
-        $msg = ["message" => "You'll need it bud."];
-        return json_encode($msg);
-    }
-
+    /**
+     * Login endpoint to take an email and password and authenticate
+     * the user login to return a token and admin status.
+     *
+     * @return false|string The JSON formatted token and admin status
+     */
     private function login() {
         $this->post();
 
@@ -160,6 +168,12 @@ class JsonWebPage implements Pageable {
         ]);
     }
 
+    /**
+     * Create a DB query to update the specified session's name
+     * passed through the HTTP header.
+     *
+     * @return false|string The JSON formatted status messages
+     */
     private function update() {
         $input = json_decode(file_get_contents("php://input"));
 
@@ -185,7 +199,12 @@ class JsonWebPage implements Pageable {
         return json_encode(array("status" => 200, "message" => "ok"));
     }
 
-    private function authors() {
+    /**
+     * Return a list of authors filtered by name or ID from the API.
+     *
+     * @return string The JSON formatted list of authors
+     */
+    private function authors(): string {
         $query = "
 SELECT authors.authorId, name, contentId FROM `authors`
 INNER JOIN `content_authors` ON content_authors.authorId = authors.authorId
@@ -206,13 +225,13 @@ INNER JOIN `content_authors` ON content_authors.authorId = authors.authorId
         return $this->recordSet->getJSONRecordSet($query . ";", $params);
     }
 
-    private function chairs() {
-        $query = "SELECT name FROM x"; // TODO:
-
-        return $this->recordSet->getJSONRecordSet($query . ";", []);
-    }
-
-    private function contentAuthors() {
+    /**
+     * Return a list of content ids, authors and institutions from
+     * the API endpoint.
+     *
+     * @return string The JSON formatted list of content authors
+     */
+    private function contentAuthors(): string {
         $query = "SELECT * FROM `content_authors`";
 
         $params = [];
@@ -230,7 +249,13 @@ INNER JOIN `content_authors` ON content_authors.authorId = authors.authorId
         return $this->recordSet->getJSONRecordSet($query . ";", $params);
     }
 
-    private function authorsForContent() {
+    /**
+     * Return a list of author names filtered by content and session
+     * authors dependent on content ID.
+     *
+     * @return string The JSON formatted author names
+     */
+    private function authorsForContent(): string {
         $query = "
 SELECT
   name
@@ -251,7 +276,13 @@ FROM
         return $this->recordSet->getJSONRecordSet($query . ";", $params);
     }
 
-    private function slots() {
+    /**
+     * Return information associated with slots according to types, ids and
+     * days join with sessions.
+     *
+     * @return string The JSON formatted list of slots
+     */
+    private function slots(): string {
         $query = "SELECT * FROM `slots` LEFT JOIN `sessions` ON slots.slotId = sessions.slotId";
 
         $params = [];
@@ -289,7 +320,12 @@ FROM
         return $this->recordSet->getJSONRecordSet($query . ";", []);
     }*/
 
-    private function content() {
+    /**
+     * Return a list of content from the DB dependent on ID.
+     *
+     * @return string The JSON formatted list of content
+     */
+    private function content(): string {
         $query = "SELECT * FROM `content`";
 
         $params = [];
@@ -304,7 +340,12 @@ FROM
         return $this->recordSet->getJSONRecordSet($query . ";", $params);
     }
 
-    private function rooms() {
+    /**
+     * Get a list of rooms filtered by room ID.
+     *
+     * @return string The JSON formatted list of rooms
+     */
+    private function rooms(): string {
         $query = "SELECT * FROM `rooms`";
 
         $params = [];
@@ -319,7 +360,12 @@ FROM
         return $this->recordSet->getJSONRecordSet($query . ";", $params);
     }
 
-    private function sessionTypes() {
+    /**
+     * Return a list of session types filtered by the type ID.
+     *
+     * @return string The JSON formatted list of session types
+     */
+    private function sessionTypes(): string {
         $query = "SELECT * FROM `session_types`";
 
         $params = [];
@@ -334,7 +380,13 @@ FROM
         return $this->recordSet->getJSONRecordSet($query . ";", $params);
     }
 
-    private function sessions() {
+    /**
+     * Return a list of copious session information dependent on
+     * a variety of IDs.
+     *
+     * @return string The JSON formatted list of sessions
+     */
+    private function sessions(): string {
         $query = "SELECT * FROM `sessions`";
 
         $params = [];
@@ -361,7 +413,12 @@ FROM
         return $this->recordSet->getJSONRecordSet($query . ";", $params);
     }
 
-    private function sessionIDs() {
+    /**
+     * Return a list of specifically just session IDs
+     *
+     * @return string The JSON formatted list of session IDs
+     */
+    private function sessionIDs(): string {
         $query = "SELECT sessionId FROM `sessions`";
 
         $params = [];
@@ -372,7 +429,13 @@ FROM
         return $this->recordSet->getJSONRecordSet($query . ";", $params);
     }
 
-    private function sessionsOnDay() {
+    /**
+     * Return a huge list of session information dependent copious
+     * joins and by the specified day,
+     *
+     * @return string The JSON formatted string of session information
+     */
+    private function sessionsOnDay(): string {
         $query = "
 SELECT DISTINCT
   sessions.sessionId,
@@ -420,11 +483,14 @@ FROM
     }
 
     /**
+     * Return a huge list of session information dependent copious
+     * joins and before the specified day.
+     *
      * Example: SELECT sessionId FROM `sessions` INNER JOIN `slots` ON sessions.slotId=slots.slotId WHERE slots.dayInt < 3;
      *
      * @return string
      */
-    private function sessionsBeforeDay() {
+    private function sessionsBeforeDay(): string {
         $query = "
 SELECT DISTINCT
   sessions.sessionId,
@@ -476,7 +542,13 @@ FROM
         return $this->recordSet->getJSONRecordSet($query . ";", []);
     }*/
 
-    private function sessionContent() {
+    /**
+     * Return a list of session content including awards and abstracts
+     * filtered by ID.
+     *
+     * @return string The JSON formatted list of session content
+     */
+    private function sessionContent(): string {
         $query = "
 SELECT
   sessions.name,
@@ -501,6 +573,11 @@ FROM
         return $this->recordSet->getJSONRecordSet($query . ";", $params);
     }
 
+    /**
+     * Return the default errored 400 API endpoint
+     *
+     * @return false|string The JSON encoded API error message
+     */
     private function defaultMessage() {
         http_response_code(400);
         return json_encode(["message" => "Invalid API endpoint provided!"]);
@@ -545,10 +622,20 @@ FROM
         return $query . " WHERE `" . $element . "` LIKE '%' || :" . $element . " || '%'";
     }
 
-    private function limit(string $query, int $limit) {
+    /**
+     * Add a limit specification to a DB query.
+     *
+     * @param string $query The DB query to add to
+     * @param int $limit The amount to limit to
+     * @return string The limited DB query
+     */
+    private function limit(string $query, int $limit): string {
         return $query . " LIMIT " . $limit;
     }
 
+    /**
+     * Set the POST information of the API
+     */
     private function post() {
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json; charset=UTF-8");

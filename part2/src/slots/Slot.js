@@ -1,7 +1,19 @@
 import React from 'react';
 
+/**
+ * Slot class to contain information on a specific
+ * slot's information and display it back to the user.
+ *
+ * @author Thomas Griffiths (W18013094)
+ */
 export default class Slot extends React.Component {
 
+    /**
+     * Create the Slot class with the state containing
+     * all the information to display for a slot.
+     *
+     * @param props Empty optional props for Authors
+     */
     constructor(props) {
         super(props);
 
@@ -17,6 +29,12 @@ export default class Slot extends React.Component {
         }
     }
 
+    /**
+     * The render method to create the JSX/HTML content
+     * for the page with class states and properties.
+     *
+     * @returns {JSX.Element} The fully rendered JSX object
+     */
     render() {
         return (
             <div className="slot" id={this.props.slotId}>
@@ -29,17 +47,4 @@ export default class Slot extends React.Component {
             </div>
         )
     }
-
-    /*componentDidMount() {
-        const url = "http://localhost/part1/api/slots?slotId=" + this.props.slotId + "&limit=1";
-
-        fetch(url)
-            .then((res) => res.json())
-            .then((data) => {
-                this.setState({data: data.data[0]})
-            })
-            .catch((err) => {
-                console.log("Something went wrong: ", err)
-            })
-    };*/
 }

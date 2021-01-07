@@ -7,13 +7,14 @@ import Author from "../authors/Author";
  * and clicking them to view more of their information at
  * the convention.
  *
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 export default class Authors extends React.Component {
 
     /**
      * Create the Authors object with pre-set page
-     * sizes and an empty query
+     * sizes and an empty query and bind the search
+     * method to the class.
      *
      * @param props Empty optional props for Authors
      */
@@ -79,13 +80,16 @@ export default class Authors extends React.Component {
     }
 
     /**
-     * Render the list of authors filtered by query
+     * The render method to create the JSX/HTML content
+     * for the page with class states and properties.
+     * Renders the list of authors filtered by query.
      *
      * @returns {JSX.Element} The fully rendered JSX object
      */
     render() {
         let filteredData = this.state.data;
 
+        // Create page sizes and button information
         let noOfPages = Math.ceil(filteredData.length / this.state.pageSize);
         if (noOfPages === 0) noOfPages = 1;
         let disabledPrevious = (this.state.page <= 1);
@@ -116,6 +120,11 @@ export default class Authors extends React.Component {
         );
     }
 
+    /**
+     * Method for handling when the component mounts and
+     * calling the search details method to fetch and search
+     * via the API endpoint.
+     */
     componentDidMount() {
         this.searchDetails();
     }

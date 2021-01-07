@@ -1,8 +1,21 @@
 import React from 'react';
 import ExpandedDay from "./sessions/ExpandedDay";
 
+/**
+ * EnableDay class to create pages of expanded days if
+ * they are visible and correspodning to the specified day.
+ *
+ * @author Thomas Griffiths (W18013094)
+ */
 export default class EnableDay extends React.Component {
 
+    /**
+     * Create the EnableDay class with the state containing
+     * if the object is shown, the sessions visibility and
+     * the paginated information.
+     *
+     * @param props Empty optional props for Authors
+     */
     constructor(props) {
         super(props);
 
@@ -31,11 +44,18 @@ export default class EnableDay extends React.Component {
         this.setState({page: this.state.page + 1})
     }
 
+    /**
+     * The render method to create the JSX/HTML content
+     * for the page with class states and properties.
+     *
+     * @returns {JSX.Element} The fully rendered JSX object
+     */
     render() {
         const {showing} = this.state;
 
         let filteredData = this.state.data;
 
+        // Create page sizes and button information
         let noOfPages = Math.ceil(filteredData.length / this.state.pageSize);
         if (noOfPages === 0) noOfPages = 1;
         let disabledPrevious = (this.state.page <= 1);
@@ -44,6 +64,7 @@ export default class EnableDay extends React.Component {
         let pageSize = this.state.pageSize;
         let page = this.state.page;
 
+        // Whether the buttons should show if the state showing is true
         let buttons = showing ? <div id="author-buttons">
             <button onClick={this.handlePreviousClick} disabled={disabledPrevious}>Previous</button>
             <span id="page-indicator">Page {this.state.page} of {noOfPages}</span>
@@ -56,12 +77,11 @@ export default class EnableDay extends React.Component {
                 <br/>
 
                 {
-                    // api call will filter down data to this day
-                    //this.state.data.map((details, id) => {
+                    // API call will filter down data to this day
                     filteredData
                         .slice(((pageSize * page) - pageSize), (pageSize * page))
                         .map((details, id) => {
-                            let day = this.props.day === details.dayString; // extra client side check for day to be sure
+                            let day = this.props.day === details.dayString; // Extra client side check for day to be sure
                             return showing && day ?
                                 <ExpandedDay
                                     key={id}
@@ -81,6 +101,11 @@ export default class EnableDay extends React.Component {
         )
     }
 
+    /**
+     * Method for handling when the component mounts
+     * making an API call to fetch slots depending on
+     * the specified day.
+     */
     componentDidMount() {
         const url = "http://localhost/part1/api/slots?day=" + this.props.day;
 

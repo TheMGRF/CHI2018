@@ -11,7 +11,8 @@ class FillableWebPage extends WebPage {
     private $content;
 
     /**
-     * FillableWebPage constructor.
+     * FillableWebPage constructor to assign variables and set the page content
+     * from the constructor passed parameter.
      *
      * @param string $title The title of the page
      * @param string $header The header to display on the page
@@ -24,7 +25,9 @@ class FillableWebPage extends WebPage {
     }
 
     /**
-     * @return false|string
+     * Get the page content
+     *
+     * @return false|string The page content
      */
     public function getPage() {
         return $this->content;

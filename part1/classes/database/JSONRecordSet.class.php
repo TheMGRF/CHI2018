@@ -3,6 +3,13 @@ namespace database;
 
 use PDO;
 
+/**
+ * Class JSONRecordSet to grab a JSON formatted RecordSet
+ * and JSON encode the return values.
+ *
+ * @package database
+ * @author Thomas Griffiths (W18013094)
+ */
 class JSONRecordSet extends RecordSet {
 
     /**

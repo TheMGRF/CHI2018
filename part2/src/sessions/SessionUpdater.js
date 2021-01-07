@@ -6,9 +6,17 @@ import Update from "../authentication/Update";
  *
  * Note: Upon clicking the update buttons an API request
  * will be sent to update the session name in the DB.
+ *
+ * @author Thomas Griffiths (W18013094)
  */
 export default class SessionUpdater extends React.Component {
 
+    /**
+     * Create the SessionUpdater class with the state containing
+     * the name to use as a base for the session.
+     *
+     * @param props Empty optional props for Authors
+     */
     constructor(props) {
         super(props);
 
@@ -18,12 +26,25 @@ export default class SessionUpdater extends React.Component {
         }
     }
 
+    /**
+     * Method for when the component has successfully updated
+     * to set the state name again to accommodate React's bad
+     * handling of textareas dynamiclly updating.
+     *
+     * @param nextProps The props to pass in
+     */
     componentDidUpdate(nextProps) {
         if (nextProps.name !== this.props.name) {
             this.setState({name: nextProps.name});
         }
     }
 
+    /**
+     * The render method to create the JSX/HTML content
+     * for the page with class states and properties.
+     *
+     * @returns {JSX.Element} The fully rendered JSX object
+     */
     render() {
         return (
             <div>

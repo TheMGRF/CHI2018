@@ -1,14 +1,28 @@
 import React from 'react';
 
+/**
+ * Update class to handle the updating of session names.
+ *
+ * @author Thomas Griffiths (W18013094)
+ */
 export default class Update extends React.Component {
 
+    /**
+     * Constructor to create the class and bind the
+     * handling of the update click method.
+     *
+     * @param props The properties associated with the class
+     */
     constructor(props) {
         super(props);
 
         this.handleUpdateClick = this.handleUpdateClick.bind(this);
     }
 
-
+    /**
+     * Method for handling the update click and sending the
+     * update API endpoint with the user token.
+     */
     handleUpdateClick() {
         const url = "http://localhost/part1/api/update"
 
@@ -25,6 +39,13 @@ export default class Update extends React.Component {
         }
     }
 
+    /**
+     * Post data method call to send the API call.
+     *
+     * @param url The URL endpoint
+     * @param json The JSON data to send
+     * @param callback The callback to associate with the call
+     */
     postData = (url, json, callback) => {
         fetch(url, {
             method: 'POST',
@@ -41,6 +62,11 @@ export default class Update extends React.Component {
             );
     }
 
+    /**
+     * The callback to be ran when the API call runs.
+     *
+     * @param data The data returned by the API call
+     */
     updateCallback = (data) => {
         console.log(data)
         if (data.status !== 200) {
@@ -48,6 +74,12 @@ export default class Update extends React.Component {
         }
     }
 
+    /**
+     * The render method to create the JSX/HTML content
+     * for the page with class states and properties.
+     *
+     * @returns {JSX.Element} The fully rendered JSX object
+     */
     render() {
         const admin = this.props.admin;
 

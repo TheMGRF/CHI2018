@@ -6,7 +6,7 @@ namespace api;
  * to different API endpoints for easy documentation reasons
  *
  * @package api
- * @author Thomas Griffiths
+ * @author Thomas Griffiths (W18013094)
  */
 class APIEndpoint {
 
@@ -15,7 +15,7 @@ class APIEndpoint {
     private $route, $description, $parameters, $authenticated, $example;
 
     /**
-     * APIEndpoint constructor.
+     * APIEndpoint constructor to assign variables.
      *
      * @param string $route The route of the API endpoint
      * @param string $description A human readable description of what the endpoint does
