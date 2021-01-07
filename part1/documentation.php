@@ -25,17 +25,28 @@
         <h3>This page, API and corresponding website are not associated with the CHI Conference or any of its sponsors.</h3>
     </div>
     <hr>
-    <h2>Available API Endpoints</h2>
 
     <div id="api-endpoints">
-        <h4>/api</h4>
-        <p>Returns information on the API including all available endpoints</p>
-        <p>No parameters</p>
-        <p>No authentication required</p>
-        <p>curl http://localhost/part1/api</p>
-    </div>
+        <h2 id="sub-header">Available API Endpoints</h2>
+        <p><b>Note:</b> Nearly all endpoints by default support the <span class="code">limit</span> parameter.</p>
+        <hr>
 
-    <hr>
+        <script>
+            const url = "http://localhost/part1/api/endpoints";
+
+            fetch(url)
+                .then((res) => res.json())
+                .then((data) => {
+                    let collection = data.endpoints;
+                    collection.map((details, id) => (
+                        document.getElementById("api-endpoints").innerHTML += "<h4><b>Route:</b> " + details.route + "</h4><p><b>Description:</b> " + details.description + "</p><p><b>Parameters:</b> " + details.parameters + "</p><p><b>Authentication:</b> " + details.authenticated + "</p>" + "<p><b>Example:</b> <span class='code'>" + details.example + "</span></p><hr>"
+                    ))
+                })
+                .catch((err) => {
+                    console.log("Something went wrong: ", err)
+                })
+        </script>
+    </div>
 
 </body>
 
