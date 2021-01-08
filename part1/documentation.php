@@ -23,6 +23,7 @@
         <h2>Author: Thomas Griffiths (W18013094)</h2>
         <h2>University Coursework</h2>
         <h3>This page, API and corresponding website are not associated with the CHI Conference or any of its sponsors.</h3>
+        <p>See <a id="api-link" href="http://localhost/part1/api" target="_blank">here</a> for the API home page.</p>
     </div>
     <hr>
 
@@ -40,7 +41,7 @@
                 .then((res) => res.json())
                 .then((data) => {
                     let collection = data.endpoints;
-                    collection.map((details, id) => (
+                    collection.map(details => (
                         document.getElementById("api-endpoints").innerHTML += "<h4><b>Route:</b> " + details.route + "</h4><p><b>Description:</b> " + details.description + "</p><p><b>Parameters:</b> " + details.parameters + "</p><p><b>Authentication:</b> " + details.authenticated + "</p>" + "<p><b>Example:</b> <span class='code'>" + details.example + "</span></p><hr>"
                     ))
                 })

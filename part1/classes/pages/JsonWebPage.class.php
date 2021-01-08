@@ -4,9 +4,13 @@ namespace pages;
 use api\APIEndpoints;
 use database\JSONRecordSet;
 use Firebase\JWT\JWT;
+use http\Exception\UnexpectedValueException;
 
 /**
  * Creates a JSON web page based on the supplied parameters
+ *
+ * Note: Nearly all API endpoint can be provided a `limit`
+ * parameter to limit the amount of objects returned by a call.
  *
  * @author Thomas Griffiths (W18013094)
  */
@@ -100,7 +104,7 @@ class JsonWebPage implements Pageable {
         http_response_code(200);
         return json_encode([
             "message" => "Welcome to the CHI2018 API!",
-            "author" => "Thomas Griffiths",
+            "author" => "Thomas Griffiths (W18013094)",
             "endpoints" => $this->apiEndpoints->getEndpointsRoutes()
         ]);
     }
@@ -618,7 +622,7 @@ FROM
      * @return string The completed and amended query
      */
     private function search(string $query, string $element): string {
-        //return $query . " WHERE `" . $element . "` LIKE CONCAT('%', :" . $element . ", '%')";
+        //return $query . " WHERE `" . $element . "` LIKE CONCAT('%', :" . $element . ", '%')"; // why tf doesnt sqlite support this
         return $query . " WHERE `" . $element . "` LIKE '%' || :" . $element . " || '%'";
     }
 

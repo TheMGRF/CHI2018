@@ -18,12 +18,11 @@ export default class Nav extends React.Component {
     render() {
         return (
             <div className="navBar">
-
                 <ul id="nav">
                     <li><Link to="/" id="schedule" /*className="active"*/>Schedule</Link></li>
                     <li><Link to="/authors" id="authors">Authors</Link></li>
                     <li><Link to="/admin" id="admin">Admin</Link></li>
-                    <li><a href="//localhost/part1/api/" target="_blank" rel="noreferrer">About</a></li>
+                    <li><a href="//localhost/part1" target="_blank" rel="noreferrer" id="about-link">About</a></li>
                 </ul>
             </div>
         )

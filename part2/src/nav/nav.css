@@ -25,7 +25,6 @@ h1 {
 #nav {
     list-style-type: none;
     margin: 0;
-    padding: 0 24% 0 24%;
     overflow: hidden;
     background: rgb(201,132,254);
     background: linear-gradient(90deg, rgba(201,132,254,1) 0%, rgba(123,137,253,1) 96%);
@@ -33,8 +32,6 @@ h1 {
 
 #nav li {
     float: left;
-
-    margin: 0 4% 0 4%;
 }
 
 #nav li a {
@@ -43,6 +40,31 @@ h1 {
     text-align: center;
     padding: 15px 55px 15px 55px;
     text-decoration: none;
+}
+
+@media only screen and (max-width: 747px) {
+    #nav li a {
+        padding: 15px 25px 15px 25px;
+    }
+}
+
+@media only screen and (max-width: 486px) {
+    #nav li a {
+        padding: 15px 20px 15px 20px;
+    }
+}
+
+@media only screen and (max-width: 410px) {
+    #nav #about-link {
+        visibility: hidden;
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    #nav li a {
+        padding: 15px 10px 15px 10px;
+    }
 }
 
 #nav li a:hover:not(.active) {

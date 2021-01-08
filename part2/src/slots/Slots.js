@@ -33,6 +33,7 @@ export default class Slots extends React.Component {
         return (
             this.state.data.map(slot => {
                 return <Slot
+                    key={slot.id}
                     slotId={slot.slotId}
                     type={slot.type}
                     dayInt={slot.dayInt}

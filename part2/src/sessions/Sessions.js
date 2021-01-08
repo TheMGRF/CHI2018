@@ -76,14 +76,12 @@ export default class Sessions extends React.Component {
                     filteredData
                         .slice(((pageSize * page) - pageSize), (pageSize * page))
                         .map((details, id) => {
-                            return <div>
-                                <Session
-                                    key={id}
-                                    details={details}
-                                    start={details.startHour + ":" + details.startMinute}
-                                    end={details.endHour + ":" + details.endMinute}
-                                />
-                            </div>;
+                            return <Session
+                                key={id}
+                                details={details}
+                                start={details.startHour + ":" + details.startMinute}
+                                end={details.endHour + ":" + details.endMinute}
+                            />;
                         })
                 }
 
