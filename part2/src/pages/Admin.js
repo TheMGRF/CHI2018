@@ -158,7 +158,7 @@ export default class Admin extends React.Component {
         }
 
         return (
-            <div>
+            <div id="admin-content">
                 <h2 id="admin-title">Admin</h2>
                 {logInOut}
 

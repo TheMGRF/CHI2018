@@ -33,9 +33,9 @@ class Router {
     /**
      * Set the page API route
      *
-     * @param string $pathArr The API path route
+     * @param array $pathArr The API path route
      */
-    public function api_route(string $pathArr) {
+    public function api_route(array $pathArr) {
         $this->page = new JsonWebPage($pathArr);
     }
 

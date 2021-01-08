@@ -27,3 +27,11 @@
     padding: 2px 5px;
     border-radius: 5px;
 }
+
+#api-link {
+    color: #FF8C00;
+}
+
+#api-link:hover {
+    color: #854d00;
+}

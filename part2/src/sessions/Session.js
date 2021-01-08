@@ -41,7 +41,7 @@ export default class Session extends React.Component {
             <div className="session" id={this.props.details.sessionId}>
                 <h3 className="session-info-expander" onClick={() => this.setState({showing: !showing})}>{this.props.details.title} &#9660;</h3>
 
-                {showing ? <SessionInfo details={this.props.details} authorsExist={this.state.data} authors={this.state.data.map(data => <span>{data.name}, </span>)}/> : null}
+                {showing ? <SessionInfo details={this.props.details} authorsExist={this.state.data} authors={this.state.data.map((data, id) => <span key={id}>{data.name}, </span>)}/> : null}
             </div>
         )
     }
