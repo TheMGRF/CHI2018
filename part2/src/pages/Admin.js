@@ -27,6 +27,7 @@ export default class Admin extends React.Component {
             page: 1,
             pageSize: 4,
             query: "",
+            mounted: false,
             data: []
         }
 
@@ -123,6 +124,10 @@ export default class Admin extends React.Component {
      * @returns {JSX.Element} The fully rendered JSX object
      */
     render() {
+        if (this.state.mounted === false) {
+            this.mount();
+        }
+
         let data = this.state.data;
 
         // Store authentication and admin values for repeat usage
@@ -177,17 +182,21 @@ export default class Admin extends React.Component {
         if (localStorage.getItem('token')) {
             this.setState({authenticated: true});
 
-            const url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/sessions";
-
-            fetch(url)
-                .then((res) => res.json())
-                .then((data) => {
-                    this.setState({data: data.data});
-                })
-                .catch((err) => {
-                    console.log("Something went wrong: ", err)
-                })
+            this.mount();
         }
+    }
+
+    mount() {
+        const url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/sessions";
+
+        fetch(url)
+            .then((res) => res.json())
+            .then((data) => {
+                this.setState({data: data.data, mounted: true});
+            })
+            .catch((err) => {
+                console.log("Something went wrong: ", err)
+            })
     }
 
     /**
