@@ -49,7 +49,7 @@ class APIEndpoints {
      *
      * @return array A list of all API endpoints
      */
-    public function getEndpoints(): array {
+    public function getEndpoints() {
         return $this->endpoints;
     }
 
@@ -58,7 +58,7 @@ class APIEndpoints {
      *
      * @return array A list of all API endpoints
      */
-    public function getEndpointsRoutes(): array {
+    public function getEndpointsRoutes() {
         $routes = [];
         foreach ($this->getEndpoints() as $endpoint) {
             array_push($routes, $endpoint->getRoute());
@@ -72,7 +72,7 @@ class APIEndpoints {
      *
      * @return array
      */
-    public function getEndpointsJSON(): array {
+    public function getEndpointsJSON() {
         $endpoints = [];
         foreach ($this->getEndpoints() as $endpoint) {
             array_push($endpoints, $endpoint->toJSON());

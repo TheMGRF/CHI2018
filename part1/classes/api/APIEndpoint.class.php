@@ -10,7 +10,7 @@ namespace api;
  */
 class APIEndpoint {
 
-    const EXAMPLE_PREFIX = "curl http://localhost/part1";
+    const EXAMPLE_PREFIX = "curl http://unn-w18013094.newnumyspace.co.uk/chi2018/part1";
 
     private $route, $description, $parameters, $authenticated, $example;
 
@@ -23,7 +23,7 @@ class APIEndpoint {
      * @param bool $authenticated Whether or not the endpoint requires authentication
      * @param string $example An example of what the endpoint returns
      */
-    public function __construct(string $route, string $description, array $parameters, bool $authenticated, string $example) {
+    public function __construct(string $route, $description, array $parameters, bool $authenticated, $example) {
         $this->route = $route;
         $this->description = $description;
         $this->parameters = $parameters;
@@ -36,7 +36,7 @@ class APIEndpoint {
      *
      * @return string The route of the API endpoint
      */
-    public function getRoute(): string {
+    public function getRoute() {
         return $this->route;
     }
 
@@ -45,7 +45,7 @@ class APIEndpoint {
      *
      * @return string The human readable description of what the endpoint does
      */
-    public function getDescription(): string {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -54,7 +54,7 @@ class APIEndpoint {
      *
      * @return array The list of parameters that can be used on the endpoint
      */
-    public function getParameters(): array {
+    public function getParameters() {
         return $this->parameters;
     }
 
@@ -63,7 +63,7 @@ class APIEndpoint {
      *
      * @return bool If the endpoint requires authentication or not
      */
-    public function isAuthenticated(): bool {
+    public function isAuthenticated() {
         return $this->authenticated;
     }
 
@@ -72,7 +72,7 @@ class APIEndpoint {
      *
      * @return string An example of what the endpoint returns
      */
-    public function getExample(): string {
+    public function getExample() {
         return $this::EXAMPLE_PREFIX . (empty($this->example) ? $this->getRoute() : $this->example);
     }
 
@@ -81,7 +81,7 @@ class APIEndpoint {
      *
      * @return array A JSON formatted string version of the endpoint
      */
-    public function toJson(): array {
+    public function toJson() {
         return [
             "route" => $this->getRoute(),
             "description" => $this->getDescription(),

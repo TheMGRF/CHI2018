@@ -52,7 +52,7 @@ export default class Session extends React.Component {
      * corresponding to the content ID.
      */
     componentDidMount() {
-        const url = "http://localhost/part1/api/authorsforcontent?contentId=" + this.props.details.contentId + "&limit=1";
+        const url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/authorsforcontent?contentId=" + this.props.details.contentId + "&limit=1";
 
         fetch(url)
             .then((res) => res.json())

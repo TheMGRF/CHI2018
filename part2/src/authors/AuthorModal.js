@@ -58,7 +58,7 @@ export default class AuthorModal extends React.Component {
      * awards if they were given.
      */
     componentDidMount() {
-        const url = "http://localhost/part1/api/sessioncontent?contentId=" + this.props.details.contentId;
+        const url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/sessioncontent?contentId=" + this.props.details.contentId;
 
         fetch(url)
             .then((res) => res.json())

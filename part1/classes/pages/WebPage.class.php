@@ -19,7 +19,7 @@ abstract class WebPage implements IWebPage, Pageable {
      * @param string $header The header to display on the page
      * @param string $css A specific style sheet to link
      */
-    public function __construct(string $title, string $header, string $css) {
+    public function __construct(string $title, $header, $css) {
         $this->title = $title;
         $this->header = $header;
         $this->css = $css;
@@ -30,7 +30,7 @@ abstract class WebPage implements IWebPage, Pageable {
      *
      * @return string The title of the page.
      */
-    public function getTitle(): string {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -39,7 +39,7 @@ abstract class WebPage implements IWebPage, Pageable {
      *
      * @return string The header of the page.
      */
-    public function getHeader(): string {
+    public function getHeader() {
         return $this->header;
     }
 
@@ -48,7 +48,7 @@ abstract class WebPage implements IWebPage, Pageable {
      *
      * @return string The CSS of the page.
      */
-    public function getCSS(): string {
+    public function getCSS() {
         return $this->css;
     }
 

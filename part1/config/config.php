@@ -7,9 +7,9 @@ use database\JSONRecordSet;
 /**
  * Auto load the PHP classes into the application
  *
- * @param string $className The class to load
+ * @param $className The class to load
  */
-function autoLoadClasses(string $className) {
+function autoLoadClasses($className) {
     $fileName = "classes\\" . strtolower($className) . ".class.php";
     $fileName = str_replace("\\", DIRECTORY_SEPARATOR, $fileName);
     if (is_readable($fileName)) {

@@ -63,7 +63,7 @@ export default class Admin extends React.Component {
      * password.
      */
     handleLoginClick = () => {
-        const url = "http://localhost/part1/api/login"
+        const url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/login"
         let json = {"email": this.state.email, "password": this.state.password};
         this.postData(url, json, this.loginCallback);
     }
@@ -177,7 +177,7 @@ export default class Admin extends React.Component {
         if (localStorage.getItem('token')) {
             this.setState({authenticated: true});
 
-            const url = "http://localhost/part1/api/sessions";
+            const url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/sessions";
 
             fetch(url)
                 .then((res) => res.json())

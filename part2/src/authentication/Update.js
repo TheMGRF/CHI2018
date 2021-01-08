@@ -24,7 +24,7 @@ export default class Update extends React.Component {
      * update API endpoint with the user token.
      */
     handleUpdateClick() {
-        const url = "http://localhost/part1/api/update"
+        const url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/update"
 
         if (localStorage.getItem("token")) {
             let token = localStorage.getItem("token");

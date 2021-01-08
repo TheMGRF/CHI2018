@@ -23,7 +23,7 @@
         <h2>Author: Thomas Griffiths (W18013094)</h2>
         <h2>University Coursework</h2>
         <h3>This page, API and corresponding website are not associated with the CHI Conference or any of its sponsors.</h3>
-        <p>See <a id="api-link" href="http://localhost/part1/api" target="_blank">here</a> for the API home page.</p>
+        <p>See <a id="api-link" href="http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api" target="_blank">here</a> for the API home page.</p>
     </div>
     <hr>
 
@@ -35,7 +35,7 @@
         <script>
             // Create an API call to fetch all the available endpoints and
             // then dynamically generate the endpoint data.
-            const url = "http://localhost/part1/api/endpoints";
+            const url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/endpoints";
 
             fetch(url)
                 .then((res) => res.json())

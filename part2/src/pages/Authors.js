@@ -50,7 +50,7 @@ export default class Authors extends React.Component {
      * @param query The name of the author to search for
      */
     searchDetails = (query) => {
-        let url = "http://localhost/part1/api/authors";
+        let url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/authors";
         if (query) url += "?name=" + query;
 
         fetch(url)

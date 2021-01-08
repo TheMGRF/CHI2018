@@ -33,18 +33,18 @@ class Router {
     /**
      * Set the page API route
      *
-     * @param array $pathArr The API path route
+     * @param $pathArr The API path route
      */
-    public function api_route(array $pathArr) {
+    public function api_route($pathArr) {
         $this->page = new JsonWebPage($pathArr);
     }
 
     /**
      * set the HTML page route
      *
-     * @param string $path The HTML page route
+     * @param $path The HTML page route
      */
-    public function html_route(string $path) {
+    public function html_route($path) {
         $ini['routes'] = parse_ini_file("config/routes.ini",true);
         $pageInfo = isset($path, $ini['routes'][$path])
             ? $ini['routes'][$path]

@@ -96,7 +96,7 @@ export default class Sessions extends React.Component {
      * its ID.
      */
     componentDidMount() {
-        const url = "http://localhost/part1/api/sessionsonday?day=" + this.props.day + "&slotId=" + this.props.slotId;
+        const url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/sessionsonday?day=" + this.props.day + "&slotId=" + this.props.slotId;
 
         fetch(url)
             .then((res) => res.json())

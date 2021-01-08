@@ -23,7 +23,7 @@ class EndpointManager {
      *
      * @return APIEndpoints An instance of the api endpoints class
      */
-    public function getApiEndpoints(): APIEndpoints {
+    public function getApiEndpoints() {
         return $this->apiEndpoints;
     }
 

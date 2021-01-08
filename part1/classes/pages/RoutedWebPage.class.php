@@ -18,7 +18,7 @@ class RoutedWebPage extends WebPage {
      * @param string $header The header to display on the page
      * @param string $css A specific style sheet to link
      */
-    public function __construct(string $route, string $title, string $header, string $css) {
+    public function __construct($route, $title, $header, $css) {
         parent::__construct($title, $header, $css);
         $this->route = $route;
     }
@@ -28,7 +28,7 @@ class RoutedWebPage extends WebPage {
      *
      * @return string
      */
-    public function getRoute(): string {
+    public function getRoute() {
         return $this->route;
     }
 

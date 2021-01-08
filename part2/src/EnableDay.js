@@ -107,7 +107,7 @@ export default class EnableDay extends React.Component {
      * the specified day.
      */
     componentDidMount() {
-        const url = "http://localhost/part1/api/slots?day=" + this.props.day;
+        const url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/slots?day=" + this.props.day;
 
         fetch(url)
             .then((res) => res.json())

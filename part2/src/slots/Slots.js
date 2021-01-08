@@ -52,7 +52,7 @@ export default class Slots extends React.Component {
      * and fetching all sessions from the API endpoint.
      */
     componentDidMount() {
-        const url = "http://localhost/part1/api/slots";
+        const url = "http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api/slots";
 
         fetch(url)
             .then((res) => res.json())

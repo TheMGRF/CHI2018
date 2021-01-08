@@ -208,7 +208,7 @@ class JsonWebPage implements Pageable {
      *
      * @return string The JSON formatted list of authors
      */
-    private function authors(): string {
+    private function authors() {
         $query = "
 SELECT authors.authorId, name, contentId FROM `authors`
 INNER JOIN `content_authors` ON content_authors.authorId = authors.authorId
@@ -235,7 +235,7 @@ INNER JOIN `content_authors` ON content_authors.authorId = authors.authorId
      *
      * @return string The JSON formatted list of content authors
      */
-    private function contentAuthors(): string {
+    private function contentAuthors() {
         $query = "SELECT * FROM `content_authors`";
 
         $params = [];
@@ -259,7 +259,7 @@ INNER JOIN `content_authors` ON content_authors.authorId = authors.authorId
      *
      * @return string The JSON formatted author names
      */
-    private function authorsForContent(): string {
+    private function authorsForContent() {
         $query = "
 SELECT
   name
@@ -286,7 +286,7 @@ FROM
      *
      * @return string The JSON formatted list of slots
      */
-    private function slots(): string {
+    private function slots() {
         $query = "SELECT * FROM `slots` LEFT JOIN `sessions` ON slots.slotId = sessions.slotId";
 
         $params = [];
@@ -329,7 +329,7 @@ FROM
      *
      * @return string The JSON formatted list of content
      */
-    private function content(): string {
+    private function content() {
         $query = "SELECT * FROM `content`";
 
         $params = [];
@@ -349,7 +349,7 @@ FROM
      *
      * @return string The JSON formatted list of rooms
      */
-    private function rooms(): string {
+    private function rooms() {
         $query = "SELECT * FROM `rooms`";
 
         $params = [];
@@ -369,7 +369,7 @@ FROM
      *
      * @return string The JSON formatted list of session types
      */
-    private function sessionTypes(): string {
+    private function sessionTypes() {
         $query = "SELECT * FROM `session_types`";
 
         $params = [];
@@ -390,7 +390,7 @@ FROM
      *
      * @return string The JSON formatted list of sessions
      */
-    private function sessions(): string {
+    private function sessions() {
         $query = "SELECT * FROM `sessions`";
 
         $params = [];
@@ -422,7 +422,7 @@ FROM
      *
      * @return string The JSON formatted list of session IDs
      */
-    private function sessionIDs(): string {
+    private function sessionIDs() {
         $query = "SELECT sessionId FROM `sessions`";
 
         $params = [];
@@ -439,7 +439,7 @@ FROM
      *
      * @return string The JSON formatted string of session information
      */
-    private function sessionsOnDay(): string {
+    private function sessionsOnDay() {
         $query = "
 SELECT DISTINCT
   sessions.sessionId,
@@ -494,7 +494,7 @@ FROM
      *
      * @return string
      */
-    private function sessionsBeforeDay(): string {
+    private function sessionsBeforeDay() {
         $query = "
 SELECT DISTINCT
   sessions.sessionId,
@@ -552,7 +552,7 @@ FROM
      *
      * @return string The JSON formatted list of session content
      */
-    private function sessionContent(): string {
+    private function sessionContent() {
         $query = "
 SELECT
   sessions.name,
@@ -621,7 +621,7 @@ FROM
      * @param string $element The element to search for
      * @return string The completed and amended query
      */
-    private function search(string $query, string $element): string {
+    private function search(string $query, $element) {
         //return $query . " WHERE `" . $element . "` LIKE CONCAT('%', :" . $element . ", '%')"; // why tf doesnt sqlite support this
         return $query . " WHERE `" . $element . "` LIKE '%' || :" . $element . " || '%'";
     }
@@ -633,7 +633,7 @@ FROM
      * @param int $limit The amount to limit to
      * @return string The limited DB query
      */
-    private function limit(string $query, int $limit): string {
+    private function limit(string $query, int $limit) {
         return $query . " LIMIT " . $limit;
     }
 
