@@ -22,7 +22,7 @@ export default class Nav extends React.Component {
                     <li><Link to="/" id="schedule" /*className="active"*/>Schedule</Link></li>
                     <li><Link to="/authors" id="authors">Authors</Link></li>
                     <li><Link to="/admin" id="admin">Admin</Link></li>
-                    <li><a href="//localhost/part1" target="_blank" rel="noreferrer" id="about-link">About</a></li>
+                    <li><a href="http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/" target="_blank" rel="noreferrer" id="about-link">About</a></li>
                 </ul>
             </div>
         )

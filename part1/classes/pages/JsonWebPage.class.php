@@ -3,7 +3,7 @@ namespace pages;
 
 use api\APIEndpoints;
 use database\JSONRecordSet;
-use Firebase\JWT\JWT;
+use firebase\jwt\JWT;
 use http\Exception\UnexpectedValueException;
 
 /**

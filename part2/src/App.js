@@ -14,7 +14,7 @@ import Admin from "./pages/Admin";
  */
 function App() {
     return (
-        <Router>
+        <Router basename="/chi2018/part2">
             <div className="App">
                 <Nav/>
 

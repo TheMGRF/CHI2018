@@ -1,5 +1,5 @@
 <?php
-namespace Firebase\JWT;
+namespace firebase\jwt;
 
 class BeforeValidException extends \UnexpectedValueException
 {

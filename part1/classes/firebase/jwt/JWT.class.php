@@ -1,6 +1,6 @@
 <?php
 
-namespace Firebase\JWT;
+namespace firebase\jwt;
 
 use \DomainException;
 use \InvalidArgumentException;
