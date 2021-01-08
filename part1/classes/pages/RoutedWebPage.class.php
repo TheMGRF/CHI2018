@@ -38,7 +38,7 @@ class RoutedWebPage extends WebPage {
      * @return false|string
      */
     public function getPage() {
-        return file_get_contents($this->route);
+        return $this->route != null ? file_get_contents($this->route) : "";
     }
 
 

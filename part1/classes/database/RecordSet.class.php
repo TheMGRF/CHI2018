@@ -19,7 +19,7 @@ abstract class RecordSet {
      *
      * @param string $dbname The databe name to establish a connection with
      */
-    function __construct(string $dbname) {
+    function __construct($dbname) {
         $this->dbConn = DatabaseConnection::getConnection($dbname);
     }
 
@@ -31,7 +31,7 @@ abstract class RecordSet {
      * @param array $params An optional associative array if you want a prepared statement
      * @return bool|PDOStatement
      */
-    function getRecordSet(string $query, $params = null) {
+    function getRecordSet($query, $params = null) {
         if (is_array($params)) {
             $this->stmt = $this->dbConn->prepare($query);
             $this->stmt->execute($params);

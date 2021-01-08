@@ -24,10 +24,10 @@ class JsonWebPage implements Pageable {
      * JsonWebPage constructor to set path and determine
      * page vs API locations.
      *
-     * @param array $pathArg The passed path argument
+     * @param $pathArg The passed path argument
      */
-    public function __construct(array $pathArg) {
-        $path = (empty($pathArg[3])) ? "api" : $pathArg[3];
+    public function __construct($pathArg) {
+        $path = (empty($pathArg[4])) ? "api" : $pathArg[4];
 
         $this->apiEndpoints = new APIEndpoints();
         $this->recordSet = new JSONRecordSet(DATABASE);
@@ -606,7 +606,7 @@ FROM
      *
      * @param string $page The JSON content to set for this "page"
      */
-    public function setPage(string $page) {
+    public function setPage($page) {
         $this->page = $page;
     }
 
@@ -621,7 +621,7 @@ FROM
      * @param string $element The element to search for
      * @return string The completed and amended query
      */
-    private function search(string $query, $element) {
+    private function search($query, $element) {
         //return $query . " WHERE `" . $element . "` LIKE CONCAT('%', :" . $element . ", '%')"; // why tf doesnt sqlite support this
         return $query . " WHERE `" . $element . "` LIKE '%' || :" . $element . " || '%'";
     }
@@ -633,7 +633,7 @@ FROM
      * @param int $limit The amount to limit to
      * @return string The limited DB query
      */
-    private function limit(string $query, int $limit) {
+    private function limit($query, $limit) {
         return $query . " LIMIT " . $limit;
     }
 

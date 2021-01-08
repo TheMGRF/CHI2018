@@ -23,7 +23,7 @@ class Router {
         $path = str_replace(BASEPATH, "", $path);
         $pathArr = explode('/', $path);
 
-        $path = (empty($pathArr[2])) ? "main" : $pathArr[2];
+        $path = (empty($pathArr[3])) ? "main" : $pathArr[3];
 
         header("Access-Control-Allow-Origin: *");
 

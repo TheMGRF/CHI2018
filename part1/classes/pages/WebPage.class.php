@@ -19,7 +19,7 @@ abstract class WebPage implements IWebPage, Pageable {
      * @param string $header The header to display on the page
      * @param string $css A specific style sheet to link
      */
-    public function __construct(string $title, $header, $css) {
+    public function __construct($title, $header, $css) {
         $this->title = $title;
         $this->header = $header;
         $this->css = $css;

@@ -23,7 +23,7 @@ class APIEndpoint {
      * @param bool $authenticated Whether or not the endpoint requires authentication
      * @param string $example An example of what the endpoint returns
      */
-    public function __construct(string $route, $description, array $parameters, bool $authenticated, $example) {
+    public function __construct($route, $description, $parameters, $authenticated, $example) {
         $this->route = $route;
         $this->description = $description;
         $this->parameters = $parameters;

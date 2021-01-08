@@ -10,7 +10,7 @@ use database\JSONRecordSet;
  * @param $className The class to load
  */
 function autoLoadClasses($className) {
-    $fileName = "classes\\" . strtolower($className) . ".class.php";
+    $fileName = "classes\\" . $className . ".class.php";
     $fileName = str_replace("\\", DIRECTORY_SEPARATOR, $fileName);
     if (is_readable($fileName)) {
         include_once $fileName;
@@ -18,6 +18,7 @@ function autoLoadClasses($className) {
         exit("File not found: " . $className . " (" . $fileName . ")");
     }
 }
+
 
 /**
  * Create a new exception handler
@@ -43,7 +44,7 @@ function exceptionHandler($e) {
  * @param array $msg The error to log
  * @param bool $database Whether to log to DB or file
  */
-function logError(array $msg, bool $database) {
+function logError($msg, $database) {
     if ($database) {
         $db = new JSONRecordSet(DATABASE);
 
