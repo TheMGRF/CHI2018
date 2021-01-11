@@ -37,7 +37,7 @@ their name. This helps condense the information and can be dismissed
 by clicking anywhere on the application.
 
 ### Finishing Student Notes
-####SQLite
+#### SQLite
 SQLite is a disaster. It didn't support several features that I would
 have liked to use in this assignment and went out of its way to be
 awkward in re-adding simple features like replacing `CONCAT` with its
