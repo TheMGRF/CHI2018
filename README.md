@@ -3,6 +3,8 @@ Year 3 Web Application Integration Assignment
 
 ### Accessing
  - The work is available in a "live" state [here](http://unn-w18013094.newnumyspace.co.uk/chi2018/part2).
+ - API Documentation: [here](http://unn-w18013094.newnumyspace.co.uk/chi2018/part1)
+ - API: [here](http://unn-w18013094.newnumyspace.co.uk/chi2018/part1/api)
  - For local use run `npm start`
  - To deploy use `npm run build` and upload the contents of `build/`
  - GitHub: [https://github.com/TheMGRF/CHI2018](https://github.com/TheMGRF/CHI2018)
@@ -94,3 +96,9 @@ holiday/Christmas period to get this done whilst there is a global pandemic ragi
 about. I heard things had been changed to "accommodate" covid but have seen no
 examples of that for this module. I feel a project of this scope was clearly designed
 with year long work in mind.
+
+*My thoughts and comments represented in this file are personal to myself as someone
+who has been programming for many years and finds these kinds of limitations frustrating.
+There is no hate or ill intent directed at any individual associated with this
+module, but rather an attempt to improve it for future students who would better benefit
+from work representative of the real world.*
